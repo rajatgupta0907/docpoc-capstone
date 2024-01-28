@@ -119,11 +119,13 @@ body {
   bottom: 0;
   left: 0;
   background: url("/assets/images/Main_homepage.jpg") center/cover;
-  opacity: 0.6; /* Adjust the opacity value as needed */
+  opacity: 0.5;
   width: 100%;
   height: 100vh;
 }
+
 .navbar_with_image > * {
+  z-index: 1;
   opacity: 1 !important;
 }
 .navbar_with_image section {
@@ -133,4 +135,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+.homepage_card {
+  box-shadow: -10px 11px 15px -11px rgba(0, 0, 0, 0.49);
+  border-radius: 1rem;
 }

@@ -8,7 +8,7 @@ const NavBar = () => {
   console.log(pathname);
   return (
     <nav
-      className={`fixed flex-row top-0 z-30 flex w-full items-center justify-between bg-dark-2 px-6 py-3 ${
+      className={`flex-row top-0 z-30 flex w-full items-center justify-between bg-dark-2 px-6 py-3 ${
         pathname === "/services" ? "bg-blue-egg" : ""
       }`}
     >

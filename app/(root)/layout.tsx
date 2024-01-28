@@ -14,11 +14,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-blue-egg-dark`}>
         <div className="body">{children}</div>
+        <footer className="bg-blue-egg-dark text-center">Trademark &copy; DocPoc</footer>
       </body>
     </html>
   );
