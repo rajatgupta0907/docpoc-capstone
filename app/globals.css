@@ -125,7 +125,7 @@ body {
 }
 
 .navbar_with_image > * {
-  z-index:1;
+  z-index: 1;
   opacity: 1 !important;
 }
 .navbar_with_image section {
@@ -135,4 +135,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+.homepage_card {
+  box-shadow: -10px 11px 15px -11px rgba(0, 0, 0, 0.49);
+  border-radius: 1rem;
 }
