@@ -15,16 +15,16 @@ export default function Home() {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col justify-start capitalize">
+    <div className="flex flex-col justify-start capitalize opacity-100">
       <div
         className={`flex flex-col ${
-          pathname === "/" ? "navbar_with_image" : "navbar"
+          pathname === "/" ? "navbar_with_image bg-black" : "navbar"
         }`}
       >
-        <div className="flex-[2] w-4/4">
+        <div className="flex-[2] w-4/4 !opacity-100">
           <NavBar />
         </div>
-        <section className="flex-[9] !cursor-pointer flex justify-center items-start flex-col align-center w-4/4 mx-60 mt-20">
+        <section className="flex-[9] flex justify-center items-start flex-col align-center w-4/4 mx-60 mt-20">
           <p className="text-heading3-chat-with-doctor">
             Doctor In Your Pocket
           </p>
