@@ -1,8 +1,13 @@
+"use client";
+import NavBar from "@/components/shared/navbar";
+import { usePathname } from "next/navigation";
 const Page = () => {
+  const pathname = usePathname();
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>This is the service page</h1>
-    </div>
+    <div className={` ${pathname === "/" ? "navbar_with_image" : "navbar"}`}>
+    <NavBar />
+  </div>
   );
 };
 export default Page;
