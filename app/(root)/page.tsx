@@ -4,7 +4,13 @@ import NavBar from "@/components/shared/navbar";
 import { Button } from "@/components/ui/button";
 import { HomePageCardContent } from "@/lib/constants";
 import { usePathname } from "next/navigation";
-
+import { Bungee } from "next/font/google";
+const bungee = Bungee({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+})
 export default function Home() {
   const pathname = usePathname();
 
@@ -35,7 +41,9 @@ export default function Home() {
       </div>
       <section className="flex flex-col w-full justify-start items-center bg-white text-blue-egg">
         <p className="text-heading3-bold mt-4">How It works</p>
-        <p className="text-heading3-chat-with-doctor mb-16">In 3 simple steps</p>
+        <p className="text-heading3-chat-with-doctor mb-16">
+          In 3 simple steps
+        </p>
         <div className="flex flex-row justify-evenly w-full">
           {HomePageCardContent.map((card) => {
             return (
@@ -47,6 +55,17 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        <Button className="mt-20 mb-20 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
+          Get Started
+        </Button>
+      </section>
+      <section className="pt-10 flex flex-col w-full justify-start items-center bg-blue-egg-dark text-white">
+        <p className="text-heading3-bold">What our patients think of us</p>
+        <div>
+          <p className={`${bungee.className} text-card-heading px-10 rotate-180 text-end`}>,,</p>
+          <p className={`text-center text-heading2-bold px-20`}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos porro illum temporibus, dolore, quidem nulla provident rerum itaque est sint aperiam deleniti aliquam esse maiores perspiciatis rem tenetur optio velit!</p>
+          <p className={`${bungee.className} text-card-heading text-end pr-16`}>,,</p>
         </div>
       </section>
     </div>
