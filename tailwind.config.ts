@@ -26,6 +26,20 @@ const config: Config = {
           fontWeight: "500",
         },
       ],
+      "heading2-bold": [
+        "1.5rem",
+        {
+          lineHeight: "140%",
+          fontWeight: "500",
+        },
+      ],
+      "heading2-account": [
+        "1.7rem",
+        {
+          lineHeight: "140%",
+          fontWeight: "500",
+        },
+      ],
     },
   },
   plugins: [],
