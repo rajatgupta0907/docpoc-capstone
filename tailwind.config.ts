@@ -22,6 +22,7 @@ const config = {
       colors: {
         border: "hsl(var(--border))",
         "blue-egg": "#77D5EE",
+        "blue-egg-dark":"#52BAD5",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -75,6 +76,13 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontSize: {
+        "card-heading": [
+          "5rem",
+          {
+            lineHeight: "140%",
+            fontWeight: "500",
+          },
+        ],
         "heading3-bold": [
           "50px",
           {

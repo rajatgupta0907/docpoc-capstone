@@ -28,15 +28,15 @@ export default function Home() {
           <p className="text-heading2-paragraph">
             where a doctor is always within reach, right in your pocket!
           </p>
-          <Button className="mt-60 px-16 py-8 cursor-pointer self-center bg-blue-egg text-white min-w-min w-5 text-2xl capitalize">
+          <Button className="mt-60 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
             Chat with a doctor
           </Button>
         </section>
       </div>
-      <section>
-        <p>How It works</p>
-        <p>In 3 simple steps</p>
-        <div>
+      <section className="flex flex-col w-full justify-start items-center bg-white text-blue-egg">
+        <p className="text-heading3-bold mt-4">How It works</p>
+        <p className="text-heading3-chat-with-doctor mb-16">In 3 simple steps</p>
+        <div className="flex flex-row justify-evenly w-full">
           {HomePageCardContent.map((card) => {
             return (
               <HomePageCard
