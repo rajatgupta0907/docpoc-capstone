@@ -22,7 +22,6 @@ const NavBar = () => {
         </p>
       </Link>
       <div className="other_links flex flex-row justify-center items-center flex-[4] ml-20">
-        {/* <Link href="/our-doctors">Our Doctors</Link> */}
         {NavLinksLanding.map((link) => {
           return (
             <Link

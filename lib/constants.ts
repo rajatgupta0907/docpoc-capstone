@@ -12,7 +12,7 @@ export const NavLinksLanding = [
     displayName: "About Us",
   },
   {
-    link: "/sign-up",
+    link: "/account",
     displayName: "Account",
   },
 ];
