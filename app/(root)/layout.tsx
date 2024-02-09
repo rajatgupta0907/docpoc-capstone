@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-blue-egg-dark`}>
+      <body className={`${inter.className} bg-blue-egg-dark flex flex-col h-screen`}>
         <div className="body">{children}</div>
-        <footer className="bg-blue-egg-dark text-center">Trademark &copy; DocPoc</footer>
+        {/* <footer className="h-10 bg-blue-egg-dark text-center ">Trademark &copy; DocPoc</footer> */}
       </body>
     </html>
   );

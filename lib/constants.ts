@@ -33,3 +33,41 @@ export const HomePageCardContent = [
     text: "Getting Prescription",
   },
 ];
+export const ServicesPageCards = [
+  {
+    id: 1,
+    header: "Medical Advice",
+    description:
+      "Experience round-the-clock access to top medical specialists with our 24/7 online consultation service. Receive immediate, expert advice for any health concern, ensuring prompt and personalized care. Benefit from the convenience of ,connecting you to medical experts from the comfort of your home. Our platform revolutionizes healthcare, offering peace of mind and expert guidance",
+    icon: "getadvice.svg",
+  },
+  {
+    id: 2,
+    header: "Video Call",
+    description:
+      "Engage in face-to-face virtual consultations from anywhere, ensuring personalized and  medical advice. This convenient platform brings expert healthcare to your fingertips, transforming how you manage your health with the added comfort of visual interaction. Embrace a new era of medical consultations, combining convenience, expertise, and the personal touch of real-time video communication",
+    icon: "video_call.svg",
+  },
+  {
+    id: 3,
+    header: "Medical Advice",
+    description:
+      "Experience round-the-clock access to top medical specialists with our 24/7 online consultation service. Receive immediate, expert advice for any health concern, ensuring prompt and personalized care. Benefit from the convenience of ,connecting you to medical experts from the comfort of your home. Our platform revolutionizes healthcare, offering peace of mind and expert guidance",
+    icon: "prescription_icon.svg",
+  },
+  // {
+  //   id:4,
+  //   header: "Medical Advice",
+  //   description:
+  //     "Experience round-the-clock access to top medical specialists with our 24/7 online consultation service. Receive immediate, expert advice for any health concern, ensuring prompt and personalized care. Benefit from the convenience of ,connecting you to medical experts from the comfort of your home. Our platform revolutionizes healthcare, offering peace of mind and expert guidance",
+  //     icon:"video_call.svg"
+  // },
+];
+
+export const ServicesWeCantProvide = [
+  "Emergency Assitance",
+  "Complex Chronic Condition Management",
+  "Surgical Procedures",
+  "Vaccinations and Certain Treatments",
+  "Diagnostic Testing",
+];
