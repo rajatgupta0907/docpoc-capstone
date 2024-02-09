@@ -25,7 +25,7 @@ const Page = () => {
             return (
               <div
                 key={card.id}
-                className="homepage_card m-2 flex flex-col justify-center px-5 rotate-2"
+                className="homepage_card m-2 flex flex-col justify-center px-5"
               >
                 <Image
                   src={`/assets/icons/${card.icon}`}
@@ -53,10 +53,10 @@ const Page = () => {
           Get Started
         </Button>
         <div className="flex flex-col">
-          <p className="text-heading3-chat-with-doctor mb-10">
+          <p className="text-heading3-chat-with-doctor mb-10 text-center">
             Services We Cannot Provide
           </p>
-          <div>
+          <div className="bg-blue-50 w-50 p-40">
             {ServicesWeCantProvide.map((s, i) => (
               <div key={i} className="flex flex-row justify-start">
                 <Image
@@ -65,7 +65,9 @@ const Page = () => {
                   height={28}
                   alt="cant_provide"
                 />
-                <p className="text-heading2-paragraph ml-5">{s}</p>
+                <p className="text-heading2-paragraph ml-5 opacity-100 text-blue-egg-dark">
+                  {s}
+                </p>
               </div>
             ))}
           </div>
