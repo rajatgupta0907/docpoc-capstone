@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <nav
       className={`flex-row top-0 z-30 flex w-full items-center justify-between bg-dark-2 px-6 py-3 ${
-        pathname === "/services" ? "bg-blue-egg" : ""
+        pathname === "/" ? "" : "bg-blue-egg"
       }`}
     >
       <Link href={"/"} className="flex items-center gap-4 flex-[2]">
