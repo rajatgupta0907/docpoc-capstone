@@ -71,3 +71,26 @@ export const ServicesWeCantProvide = [
   "Vaccinations and Certain Treatments",
   "Diagnostic Testing",
 ];
+
+export const OurMission = [
+  {
+    boldText: "Accessiblity:",
+    description:
+      "To make healthcare accessible to everyone, regardless of their location or the time of day, breaking down the barriers to a healthier life.",
+  },
+  {
+    boldText: "Quality Care:",
+    description:
+      "To ensure every interaction on our platform is with certified, experienced, and compassionate healthcare professionals.",
+  },
+  {
+    boldText: "Privacy and Security:",
+    description:
+      "To protect our users' privacy with the highest standards of data protection, ensuring confidentiality and security in all medical consultations.",
+  },
+  {
+    boldText: "Innovation:",
+    description:
+      "To continuously improve and innovate our services by integrating the latest technologies in telemedicine, ensuring we meet the evolving needs of our patients and healthcare providers.",
+  },
+];
