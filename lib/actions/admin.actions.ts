@@ -64,3 +64,28 @@ export async function updateDoctor({
     throw new Error(`Failed to create/update user: ${error.message}`);
   }
 }
+
+
+export async function getDoctor(perPage: number, page: number)  {
+  try {
+    console.log("Perpage"+perPage+"Page"+page);
+    // DB Connect
+    const client = await connectToDb();
+    
+
+    // DB Query
+    const itemsQuery =  doctor
+      .find({})
+      .skip(perPage * (page - 1))
+      .limit(perPage);
+      const items = await itemsQuery.exec();
+
+
+    const itemCount = await doctor.countDocuments({});
+
+    const respnse = { items, itemCount };
+    return respnse;
+  } catch (error) {
+    throw new Error("Failed to fetch data. Please try again later.");
+  }
+}
