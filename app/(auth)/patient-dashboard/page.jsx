@@ -9,7 +9,7 @@ import {getDoctor} from '@/lib/actions/admin.actions'
 const  Page = async ({searchParams }) => {
     let page = parseInt(searchParams.page, 10);
     page = !page || page < 1 ? 1 : page;
-    const perPage = 2;
+    const perPage = 4;
 
 
     const data = await getDoctor(perPage, page);

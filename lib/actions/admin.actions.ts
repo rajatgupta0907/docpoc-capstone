@@ -18,6 +18,15 @@ interface Params {
   speciality:string;
 }
 
+export async function detailsfetchdoctor(userId:string) {
+  try {
+    connectToDb();
+
+  return await doctor.findOne({ id: userId });
+} catch (error: any) {
+  throw new Error(`Failed to fetch user: ${error.message}`);
+}
+}
 export async function fetchDoctor(userId: string) {
     try {
         connectToDb();
