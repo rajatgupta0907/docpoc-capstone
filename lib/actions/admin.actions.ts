@@ -6,7 +6,6 @@ import { revalidatePath } from "next/cache";
 import doctor from "../models/doctor.model";
 import { connectToDb } from "../mongoose";
 
-
 interface Params {
   userId: string;
   username: string;
@@ -14,29 +13,28 @@ interface Params {
   bio: string;
   image: string;
   path: string;
-  phonenumber:string;
-  speciality:string;
+  phonenumber: string;
+  speciality: string;
 }
 
-export async function detailsfetchdoctor(userId:string) {
+export async function detailsfetchdoctor(userId: string) {
   try {
     connectToDb();
 
-  return await doctor.findOne({ id: userId });
-} catch (error: any) {
-  throw new Error(`Failed to fetch user: ${error.message}`);
-}
+    return await doctor.findOne({ id: userId });
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
+  }
 }
 export async function fetchDoctor(userId: string) {
-    try {
-        connectToDb();
-  
-      return await doctor.findOne({ id: userId });
-    } catch (error: any) {
-      throw new Error(`Failed to fetch user: ${error.message}`);
-    }
-  }
+  try {
+    connectToDb();
 
+    return await doctor.findOne({ id: userId });
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
+  }
+}
 
 export async function updateDoctor({
   userId,
@@ -47,7 +45,7 @@ export async function updateDoctor({
 
   phonenumber,
   image,
-  speciality
+  speciality,
 }: Params): Promise<void> {
   try {
     connectToDb();
@@ -74,22 +72,18 @@ export async function updateDoctor({
   }
 }
 
-
-export async function getDoctor(perPage: number, page: number)  {
+export async function getDoctor(perPage: number, page: number) {
   try {
-    console.log("Perpage"+perPage+"Page"+page);
+    console.log("Perpage" + perPage + "Page" + page);
     // DB Connect
     const client = await connectToDb();
-    
 
     // DB Query
-    const itemsQuery =  doctor
+    const itemsQuery = doctor
       .find({})
       .skip(perPage * (page - 1))
       .limit(perPage);
-      const items = await itemsQuery.exec();
-
-
+    const items = await itemsQuery.exec();
     const itemCount = await doctor.countDocuments({});
 
     const respnse = { items, itemCount };

@@ -14,10 +14,17 @@ export const UserValidation = z.object({
     .string()
     .min(3, { message: "Minimum 3 characters." })
     .max(1000, { message: "Maximum 1000 caracters." }),
-    phonenumber: z.string()
+  phonenumber: z
+    .string()
     .min(10, { message: "Only 10 Characeters are allowed" })
     .max(10, { message: "Only 10 Characeters are allowed" }),
-    speciality:z.string({
-      required_error: "Please select an email to display.",
-    })
+  speciality: z.string({
+    required_error: "Please select an email to display.",
+  }),
+});
+export const DoctorSearchValidation = z.object({
+  specialty: z.string({
+    required_error: "Please select a specialty to display.",
+  }),
+  name: z.string(),
 });
