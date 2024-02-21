@@ -94,3 +94,8 @@ export const OurMission = [
       "To continuously improve and innovate our services by integrating the latest technologies in telemedicine, ensuring we meet the evolving needs of our patients and healthcare providers.",
   },
 ];
+export const DoctorTypes = [
+  "General Practitioner",
+  "Ophthalmologist",
+  "Pediatrician",
+];
