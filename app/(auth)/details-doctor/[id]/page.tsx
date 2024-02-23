@@ -1,3 +1,4 @@
+"use server"
 import DisplayDetailedDoctors from '@/components/cards/DisplayDetailedDoctors';
 import { detailsfetchdoctor } from '@/lib/actions/admin.actions';
 import Link from 'next/link';
@@ -29,7 +30,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                                         <p className="text-gray-700 leading-relaxed">{doctor.bio}</p>
                                         <p className="text-gray-700 mt-4">Phone Number: {doctor.phonenumber}</p>
                                         <br></br>
-                                        <Link  href="#" className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-full mt-4">
+                                        <Link  href={ `/create-appointment/${params.id}` } className="bg-blue-500 text-white font-semibold px-4 py-2 rounded-full mt-4">
                                             Schedule Your Appointment
                                         </Link>
                                     </div>
