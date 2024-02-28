@@ -18,15 +18,25 @@ export async function fetchDoctors({ name, specialty }: Props) {
 
     // return await Doctor.find({ specialty: specialty, name: name });
     // const itemsQuery = Doctor.find({ specialty: specialty, name: name });
-    const regex = new RegExp(name, 'i');
-    console.log("specialty", specialty);
+    if (name.trim() !== "") {
+      const regex = new RegExp(name, "i");
+      console.log("specialty", specialty);
 
-    const items = await Doctor.find({ name: regex }).exec();
-    const itemCount = await Doctor.countDocuments({});
+      const items = await Doctor.find({ name: regex }).exec();
+      const itemCount = await Doctor.countDocuments({});
+      const response = { items, itemCount };
+      console.log("should not be here");
+      // console.log(response);
+      return response;
+    } else {
+      console.log("should be here");
+      const regex = new RegExp(specialty, "i");
 
-    const response = { items, itemCount };
-    // console.log(response);
-    return response;
+      const items = await Doctor.find({ speciality: regex }).exec();
+      const itemCount = await Doctor.countDocuments({});
+      const response = { items, itemCount };
+      return response;
+    }
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }

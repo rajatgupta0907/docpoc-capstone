@@ -8,7 +8,7 @@ import {
   SelectItem,
 } from "@radix-ui/react-select";
 import { Link } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -23,9 +23,10 @@ import { DoctorSearchValidation } from "@/lib/validations/doctor";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "../ui/input";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getDoctor } from "@/lib/actions/admin.actions";
 import { fetchDoctors } from "@/lib/actions/doctor.actions";
+type Inputs = z.infer<typeof DoctorSearchValidation>;
 
 const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
   useEffect(() => {
@@ -35,13 +36,24 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
     };
     fetch();
   }, [perPage, setDoctors, page]);
-  const form = useForm({
+
+  const [data, setData] = useState<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({
     resolver: zodResolver(DoctorSearchValidation),
-    defaultValues: {
-      name: "",
-      specialty: DoctorTypes[0],
-    },
   });
+  // const form = useForm({
+  //   resolver: zodResolver(DoctorSearchValidation),
+  //   defaultValues: {
+  //     name: "",
+  //     specialty: DoctorTypes[0],
+  //   },
+  // });
   const fetchDoctorsFromBackend = async (
     name: string,
     specialty: string
@@ -50,72 +62,54 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
     console.log(response);
     return response;
   };
-  async function onSubmit(data: z.infer<typeof DoctorSearchValidation>) {
-    const name = data.name;
-    const specialty = data.specialty;
-    console.log(specialty);
-    setDoctors(await fetchDoctorsFromBackend(name, specialty));
-  }
+  const processForm: SubmitHandler<Inputs> = async (data) => {
+    console.log(data);
+    reset();
+    setData(data);
+    // const name = data.name;
+    // const specialty = data.specialty;
+    // console.log(specialty);
+    setDoctors(await fetchDoctorsFromBackend(data.name, data.specialty));
+  };
+  const clickc = () => {
+    console.log("first");
+  };
   return (
-    <>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
-        >
-          <FormField
-            control={form.control}
-            name="specialty"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Specialty</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a verified specialty to display" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {DoctorTypes.map((d, i) => {
-                      return (
-                        <SelectItem key={i} value={d}>
-                          {d}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-
-                <FormMessage />
-              </FormItem>
-            )}
+    <div className="text-black">
+      <form onSubmit={handleSubmit(processForm)} className="w-2/3 space-y-6">
+        <div>
+          <input
+            placeholder="name"
+            className="rounded-lg text-black"
+            {...register("name")}
           />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="flex w-full flex-col gap-3">
-                <FormLabel className="text-base-semibold text-light-2">
-                  {"Doctor's Name"}
-                </FormLabel>
-                <FormControl className="no-focus border-dark-4 bg-dark-3 text-light-1">
-                  <Input
-                    type={"text"}
-                    className="account-form_input text-black"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
-    </>
+          {errors.name?.message && (
+            <p className="text-sm text-red-400">{errors.name.message}</p>
+          )}
+        </div>
+        <div>
+          {/* <input
+            placeholder="name"
+            className="rounded-lg text-black"
+            {...register("specialty")}
+          /> */}
+          <select id="" {...register("specialty")}>
+            <option value={""}>{""}</option>
+            {DoctorTypes.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {errors.specialty?.message && (
+            <p className="text-sm text-red-400">{errors.specialty.message}</p>
+          )}
+        </div>
+        <button type="submit" onClick={handleSubmit(processForm)}>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 export default DoctorFilter;
