@@ -14,5 +14,6 @@ const userSchema = new mongoose.Schema({
     default:false,
   }
 });
+
 const doctor = mongoose.models.doctor || mongoose.model("doctor", userSchema);
 export default doctor;
