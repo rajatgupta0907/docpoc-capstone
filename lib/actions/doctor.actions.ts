@@ -4,6 +4,7 @@ import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Doctor from "../models/doctor.model";
+import DoctorType from "../models/doctortype.model";
 import { connectToDb } from "../mongoose";
 
 interface Props {
@@ -59,7 +60,7 @@ export async function saveSpecialtyToDoctor({
   try {
     connectToDb();
     console.log("userId", userId);
-    const result= await Doctor.findOneAndUpdate(
+    const result= await DoctorType.findOneAndUpdate(
       { id:  userId},
       {
 
