@@ -34,16 +34,16 @@ import { UserValidation } from "@/lib/validations/doctor";
 import { updateDoctor } from "@/lib/actions/admin.actions";
 
 interface Props {
-    doctor: {
+  doctor: {
     id: string;
     objectId: string;
     username: string;
     name: string;
     bio: string;
     image: string;
-    phonenumber:string;
-    isVerified:boolean;
-    speciality:string;
+    phonenumber: string;
+    isVerified: boolean;
+    speciality: string;
   };
   btnTitle: string;
 }
@@ -62,11 +62,11 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
       name: doctor?.name ? doctor.name : "",
       username: doctor?.username ? doctor.username : "",
       bio: doctor?.bio ? doctor.bio : "",
-      phonenumber:doctor?.phonenumber ? doctor.phonenumber: "",
-      speciality:doctor?.speciality ? doctor.speciality : "Please select your speciality"
-      
+      phonenumber: doctor?.phonenumber ? doctor.phonenumber : "",
+      speciality: doctor?.speciality
+        ? doctor.speciality
+        : "Please select your speciality",
     },
-
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
@@ -88,10 +88,9 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
       userId: doctor.id,
       bio: values.bio,
       image: values.profile_photo,
-      phonenumber:values.phonenumber,
-      speciality:values.speciality
+      phonenumber: values.phonenumber,
+      speciality: values.speciality,
     });
-
   };
 
   const handleImage = (
@@ -120,40 +119,40 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
   return (
     <Form {...form}>
       <form
-        className='flex flex-col justify-start gap-10'
+        className="flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
-          name='profile_photo'
+          name="profile_photo"
           render={({ field }) => (
-            <FormItem className='flex items-center gap-4'>
-              <FormLabel className='account-form_image-label'>
+            <FormItem className="flex items-center gap-4">
+              <FormLabel className="account-form_image-label">
                 {field.value ? (
                   <Image
                     src={field.value}
-                    alt='profile_icon'
+                    alt="profile_icon"
                     width={96}
                     height={96}
                     priority
-                    className='rounded-full object-contain'
+                    className="rounded-full object-contain"
                   />
                 ) : (
                   <Image
-                    src='/assets/profile.svg'
-                    alt='profile_icon'
+                    src="/assets/profile.svg"
+                    alt="profile_icon"
                     width={24}
                     height={24}
-                    className='object-contain'
+                    className="object-contain"
                   />
                 )}
               </FormLabel>
-              <FormControl className='flex-1 text-base-semibold text-gray-200'>
+              <FormControl className="flex-1 text-base-semibold text-gray-200">
                 <Input
-                  type='file'
-                  accept='image/*'
-                  placeholder='Add profile photo'
-                  className='account-form_image-input'
+                  type="file"
+                  accept="image/*"
+                  placeholder="Add profile photo"
+                  className="account-form_image-input"
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
@@ -163,16 +162,16 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='name'
+          name="name"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Name
               </FormLabel>
               <FormControl>
                 <Input
-                  type='text'
-                  className='account-form_input no-focus'
+                  type="text"
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -183,16 +182,16 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='username'
+          name="username"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Username
               </FormLabel>
               <FormControl>
                 <Input
-                  type='text'
-                  className='account-form_input no-focus'
+                  type="text"
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -201,18 +200,18 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
           )}
         />
 
-      <FormField
+        <FormField
           control={form.control}
-          name='phonenumber'
+          name="phonenumber"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
-              Phonenumber
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                Phonenumber
               </FormLabel>
               <FormControl>
                 <Input
-                  type='text'
-                  className='account-form_input no-focus'
+                  type="text"
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -221,38 +220,43 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
           )}
         />
 
-      <FormField
+        <FormField
           control={form.control}
-          name='speciality'
+          name="speciality"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
-              Speciality
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                Speciality
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-
-              <FormControl>
-              <SelectTrigger>
+                <FormControl>
+                  <SelectTrigger>
                     <SelectValue placeholder={field.value} />
                   </SelectTrigger>
-                
-              </FormControl>
-              <SelectContent>
-              <SelectItem value="General Practitioner">General Practitioner</SelectItem>
-                <SelectItem value="Pediatrician">Pediatrician</SelectItem>
-                <SelectItem value="Cardiologist">Cardiologist</SelectItem>
-                <SelectItem value="Dermatologist">Dermatologist</SelectItem>
-                <SelectItem value="Neurologist">Neurologist</SelectItem>
-                <SelectItem value="Ophthalmologist">Ophthalmologist</SelectItem>
-                <SelectItem value="Orthopedic Surgeon">Orthopedic Surgeon</SelectItem>
-                <SelectItem value="Psychiatrist">Psychiatrist</SelectItem>
-                <SelectItem value="Gynecologist">Gynecologist</SelectItem>
-                <SelectItem value="Urologist">Urologist</SelectItem>
-                <SelectItem value="Endocrinologist">Endocrinologist</SelectItem>
-                <SelectItem value="Oncologist">Oncologist</SelectItem>
-                <SelectItem value="Dentist">Dentist</SelectItem>
-
-              </SelectContent>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="General Practitioner">
+                    General Practitioner
+                  </SelectItem>
+                  <SelectItem value="Pediatrician">Pediatrician</SelectItem>
+                  <SelectItem value="Cardiologist">Cardiologist</SelectItem>
+                  <SelectItem value="Dermatologist">Dermatologist</SelectItem>
+                  <SelectItem value="Neurologist">Neurologist</SelectItem>
+                  <SelectItem value="Ophthalmologist">
+                    Ophthalmologist
+                  </SelectItem>
+                  <SelectItem value="Orthopedic Surgeon">
+                    Orthopedic Surgeon
+                  </SelectItem>
+                  <SelectItem value="Psychiatrist">Psychiatrist</SelectItem>
+                  <SelectItem value="Gynecologist">Gynecologist</SelectItem>
+                  <SelectItem value="Urologist">Urologist</SelectItem>
+                  <SelectItem value="Endocrinologist">
+                    Endocrinologist
+                  </SelectItem>
+                  <SelectItem value="Oncologist">Oncologist</SelectItem>
+                  <SelectItem value="Dentist">Dentist</SelectItem>
+                </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
@@ -261,16 +265,16 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
 
         <FormField
           control={form.control}
-          name='bio'
+          name="bio"
           render={({ field }) => (
-            <FormItem className='flex w-full flex-col gap-3'>
-              <FormLabel className='text-base-semibold text-light-2'>
+            <FormItem className="flex w-full flex-col gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
                 Bio
               </FormLabel>
               <FormControl>
                 <Textarea
                   rows={10}
-                  className='account-form_input no-focus'
+                  className="account-form_input no-focus"
                   {...field}
                 />
               </FormControl>
@@ -279,7 +283,7 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
+        <Button type="submit" className="bg-primary-500">
           {btnTitle}
         </Button>
       </form>
