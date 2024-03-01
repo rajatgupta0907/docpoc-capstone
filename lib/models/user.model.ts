@@ -7,11 +7,13 @@ const userSchema = new mongoose.Schema({
     image:{String},
     bio:{String},
     phonenumber:{String},
-
     onBoarded:{
         type:Boolean,
         default:false,
     },
+    profileType: {String},
+
+    
 
 });
 
