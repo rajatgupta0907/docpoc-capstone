@@ -10,6 +10,12 @@ interface Props {
   name: string;
   specialty: string;
 }
+
+
+interface SpecialityParams{
+  userId: string,
+  profileType: string
+}
 export async function fetchDoctors({ name, specialty }: Props) {
   try {
     connectToDb();
@@ -42,35 +48,40 @@ export async function fetchDoctors({ name, specialty }: Props) {
   }
 }
 
-// export async function updateUser({
-//   userId,
-//   bio,
-//   name,
-//   path,
-//   username,
 
-//   phonenumber,
-//   image,
-// }: Params): Promise<void> {
-//   try {
-//     connectToDb();
-//     await User.findOneAndUpdate(
-//       { id: userId },
-//       {
-//         username,
-//         name,
-//         bio,
-//         image,
-//         phonenumber,
-//         onboarded: true,
-//       },
-//       { upsert: true }
-//     );
 
-//     if (path === "/profile/edit") {
-//       revalidatePath(path);
-//     }
-//   } catch (error: any) {
-//     throw new Error(`Failed to create/update user: ${error.message}`);
-//   }
-// }
+
+export async function saveSpecialtyToDoctor({
+  userId,
+  profileType
+}: SpecialityParams): Promise<boolean> {
+
+  try {
+    connectToDb();
+    console.log("userId", userId);
+    const result= await Doctor.findOneAndUpdate(
+      { id:  userId},
+      {
+
+        username: "",
+        name:"",
+      profileType: "doctor"
+      },
+      { upsert: true, new: true }
+    );
+
+    if (result) {
+      return !!result.lastErrorObject?.updatedExisting; 
+    } else {
+
+      return false;
+    }
+
+      
+  } catch (error: any) {
+    throw new Error(`Failed to create/update user: ${error.message}`);
+  }
+}
+
+
+

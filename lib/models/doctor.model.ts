@@ -7,8 +7,12 @@ const userSchema = new mongoose.Schema({
   image: { String },
   bio: { String },
   phonenumber: { String },
-  isVerified: { Boolean },
   speciality: { String },
+  profileType: {String},
+  isVerified:{
+    type:Boolean,
+    default:false,
+  }
 });
 
 const doctor = mongoose.models.doctor || mongoose.model("doctor", userSchema);

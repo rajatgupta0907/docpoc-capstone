@@ -29,8 +29,13 @@ export async function detailsfetchdoctor(userId: string) {
 export async function fetchDoctor(userId: string) {
   try {
     connectToDb();
-
-    return await doctor.findOne({ id: userId });
+    const data = await doctor.findOne({ id: userId });
+    if(data){
+      return data;
+    }else{
+      return null;
+    }
+     
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }

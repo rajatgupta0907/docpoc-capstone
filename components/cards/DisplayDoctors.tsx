@@ -2,11 +2,12 @@ import React from "react";
 import Link from "next/link";
 
 interface Params {
-  id: string; // Adjust the type as per your data structure
-  bio: string; // Adjust the type as per your data structure
-  image: string; // Adjust the type as per your data structure
-  name: string; // Adjust the type as per your data structure
-  speciality: string; // Adjust the type as per your data structure
+  id: string; 
+  bio: string; 
+  image: string; 
+  name: string; 
+  speciality: string; 
+  isVerified:boolean;
 }
 export default function DisplayDoctors({
   id,
@@ -14,7 +15,13 @@ export default function DisplayDoctors({
   image,
   name,
   speciality,
+  isVerified,
 }: Params) {
+
+  if (!isVerified) {
+    return null; 
+  }
+
   let a = 5;
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-[25px] p-[25px]">
