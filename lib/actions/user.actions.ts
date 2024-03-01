@@ -4,6 +4,7 @@ import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { currentUser } from "@clerk/nextjs";
 import User from "../models/user.model";
+import UserType from '../models/usertype.model'
 import { connectToDb } from "../mongoose";
 
 interface Params {
@@ -79,7 +80,7 @@ export async function saveSpecialtyToUser({
   try {
     connectToDb();
     console.log("userId", userId);
-    const result= await User.findOneAndUpdate(
+    const result= await UserType.findOneAndUpdate(
       { id:  userId},
       {
 
