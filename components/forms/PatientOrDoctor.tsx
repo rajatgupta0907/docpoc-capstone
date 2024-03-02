@@ -2,24 +2,6 @@
 
 import { useState } from "react";
 import { saveSpecialtyToUser } from "@/lib/actions/user.actions";
-<<<<<<< HEAD
-import { saveSpecialtyToDoctor } from "@/lib/actions/doctor.actions";
-interface Props {
-  userId: string;
-}
-async function saveSpecialtyType(
-  profileType: string,
-  userId: string,
-  setSuccessMessage: React.Dispatch<React.SetStateAction<boolean>>
-) {
-  try {
-    if (profileType === "patient") {
-      await saveSpecialtyToUser({ userId: userId, profileType: profileType });
-      window.location.href = "/patient-dashboard";
-    } else {
-      await saveSpecialtyToDoctor({ userId: userId, profileType: profileType });
-      window.location.href = "/doctor-admin";
-=======
 import  {saveSpecialtyToDoctor} from '@/lib/actions/doctor.actions';
 interface Props{
     userId : string,
@@ -43,7 +25,6 @@ async function saveSpecialtyType(profileType: string, username: string,userId: s
         alert(error);
         console.error("Error saving specialty type:", error);
         // Handle error
->>>>>>> 9ec559442aaa32948759a3f5ff25986c396d6431
     }
     setSuccessMessage(true);
   } catch (error) {

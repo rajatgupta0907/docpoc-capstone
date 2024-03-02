@@ -71,6 +71,7 @@ export async function createAppointment({
       text: `You have a new appointment at ${appointment_date} ${appointment_time}`,
     });
   } catch (error: any) {
+    console.log(error);
     throw new Error(`Failed to create appointment: ${error.message}`);
   }
 }
