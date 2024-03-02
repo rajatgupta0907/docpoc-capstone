@@ -68,12 +68,14 @@ export async function updateUser({
 
 interface SpecialityParams{
   userId: string,
-  profileType: string
+  profileType: string,
+  username: string
 }
 
 export async function saveSpecialtyToUser({
   userId,
-  profileType
+  profileType,
+  username
 }: SpecialityParams): Promise<boolean> {
 
   try {
@@ -82,11 +84,11 @@ export async function saveSpecialtyToUser({
     const result= await User.findOneAndUpdate(
       { id:  userId},
       {
-
-        username: "",
+        username: username,
+        name: "",
       profileType: "patient"
       },
-      { upsert: true, new: true }
+      { upsert: true }
     );
 
     if (result) {
