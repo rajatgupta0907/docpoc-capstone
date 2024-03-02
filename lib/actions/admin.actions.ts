@@ -30,12 +30,11 @@ export async function fetchDoctor(userId: string) {
   try {
     connectToDb();
     const data = await doctor.findOne({ id: userId });
-    if(data){
+    if (data) {
       return data;
-    }else{
+    } else {
       return null;
     }
-     
   } catch (error: any) {
     throw new Error(`Failed to fetch user: ${error.message}`);
   }
@@ -47,7 +46,6 @@ export async function updateDoctor({
   name,
   path,
   username,
-
   phonenumber,
   image,
   speciality,

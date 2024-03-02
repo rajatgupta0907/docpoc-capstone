@@ -4,6 +4,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { currentUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/nextjs";
+import { createAppointment } from "@/lib/actions/appointment.actions";
 const Page = ({ params }: { params: { id: string } }) => {
   // const params = useParams();
   const clerk = useClerk();
@@ -35,7 +36,27 @@ const Page = ({ params }: { params: { id: string } }) => {
     } else {
       const formattedDate = clickedDate.toLocaleDateString();
       const formattedTime = clickedDate.toLocaleTimeString();
-      alert("Date: " + formattedDate + "\nTime: " + formattedTime);
+      console.log(
+        currentUser?.id +
+          " " +
+          params.id +
+          " " +
+          formattedDate +
+          " " +
+          formattedTime
+      );
+      const appointmentObject = {
+        doctor_id: params.id,
+        patient_id: currentUser!.id,
+        appointment_date: formattedDate,
+        appointment_time: formattedTime,
+      };
+      try {
+        await createAppointment(appointmentObject);
+      } catch (err: any) {
+        alert(err.message);
+      }
+      console.log(appointmentObject);
     }
   };
 
