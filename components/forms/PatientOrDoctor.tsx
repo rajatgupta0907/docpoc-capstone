@@ -27,54 +27,9 @@ async function saveSpecialtyType(profileType: string, username: string,userId: s
         // Handle error
     }
     setSuccessMessage(true);
-  } catch (error) {
-    alert(error);
-    console.error("Error saving specialty type:", error);
-    // Handle error
-  }
+
 }
 
-<<<<<<< HEAD
-const PatientOrDoctor = ({ userId }: Props) => {
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(
-    null
-  );
-
-  return (
-    <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
-      <h1 className="head-text">Welcome to DOCPOC</h1>
-      <h4 className="head-text">Please Select your Specialty Type</h4>
-      <div>
-        <button
-          onClick={() => {
-            setSelectedSpecialty("patient");
-          }}
-        >
-          Patient
-        </button>
-        <button
-          onClick={() => {
-            setSelectedSpecialty("doctor");
-          }}
-        >
-          Doctor
-        </button>
-      </div>
-      {selectedSpecialty && (
-        <button
-          onClick={() =>
-            saveSpecialtyType(selectedSpecialty, userId, setShowSuccessMessage)
-          }
-        >
-          Save
-        </button>
-      )}
-      {showSuccessMessage && <p>Specialty type saved successfully!</p>}
-    </main>
-  );
-};
-=======
 const PatientOrDoctor = ({userId, username}:Props) =>{
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(null);
@@ -96,6 +51,5 @@ const PatientOrDoctor = ({userId, username}:Props) =>{
         </main>
     );
 }
->>>>>>> 9ec559442aaa32948759a3f5ff25986c396d6431
 
 export default PatientOrDoctor;
