@@ -1,7 +1,7 @@
 "use server";
 import appointment from "../models/appointment.model";
 import { connectToDb } from "../mongoose";
-import {ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 import EmailUtil, { EmailOptions } from "../nodemailer";
 import { clerkClient } from "@clerk/nextjs/server";
@@ -78,8 +78,6 @@ export async function createAppointment({
   }
 }
 
-
-
 export async function rescheduleAppointment({
   doctor_id,
   patient_id,
@@ -112,24 +110,24 @@ export async function rescheduleAppointment({
       appointment_time,
     });
     await appt.save();
-    const query = { _id:prev_id };
+    const query = { _id: prev_id };
 
     const result = await appointment.findOneAndDelete(query);
     console.log(result);
-    revalidatePath('/appointments');
+    revalidatePath("/appointments");
     const emailOfDoctor = await getUserEmail(doctor_id);
     const emailOfPatient = await getUserEmail(patient_id);
     console.log(emailOfDoctor, emailOfPatient);
     //
     await sendEmail({
       to: emailOfDoctor,
-      subject: "New Appointment",
-      text: `You have a new appointment at ${appointment_date} ${appointment_time}`,
+      subject: "Updated Appointment",
+      text: `Your appointment has been updated. Your new appointment is at ${appointment_date} ${appointment_time}`,
     });
     await sendEmail({
       to: emailOfPatient,
-      subject: "New Appointment",
-      text: `You have a new appointment at ${appointment_date} ${appointment_time}`,
+      subject: "Updated Appointment",
+      text: `Your appointment has been updated. Your new appointment is at ${appointment_date} ${appointment_time}`,
     });
   } catch (error: any) {
     console.log(error);
@@ -137,76 +135,73 @@ export async function rescheduleAppointment({
   }
 }
 
-
-export async function deleteAppointment({_id}:{
-  _id: string
-}){
+export async function deleteAppointment({ _id }: { _id: string }) {
   console.log(_id);
   try {
     connectToDb();
     let deleteapp = {
-      _id: _id
+      _id: _id,
     };
-    const data = await appointment.findOneAndDelete({
-      deleteapp
+    const data = await appointment.findById({
+      deleteapp,
     });
-    if(data){
+    const emailOfDoctor = await getUserEmail(data.doctor_id);
+    const emailOfPatient = await getUserEmail(data.patient_id);
+    await sendEmail({
+      to: emailOfDoctor,
+      subject: "Appointment Canceled",
+      text: `Your Appointment has been canceled. Thank you!`,
+    });
+    await sendEmail({
+      to: emailOfPatient,
+      subject: "Appointment Canceled",
+      text: `Your Appointment has been canceled. Thank you!`,
+    });
+    await data.deleteOne();
+    if (data) {
       return true;
-    }else{
+    } else {
       return false;
     }
-
-  }catch(error: any){
-    console.log('error'+ error.message);
+  } catch (error: any) {
+    console.log("error" + error.message);
   }
 }
 
 export async function getAppointmentbyPatient({
-  patient_id
-  
+  patient_id,
 }: {
-  
   patient_id: string;
-      
 }) {
   try {
     connectToDb();
     // find out if the same appointment exists
     const data = await appointment.find({
-      patient_id
+      patient_id,
     });
 
     return data;
-  }catch(error: any){
+  } catch (error: any) {
     console.log(error);
     throw new Error(`Failed to find appointment: ${error.message}`);
-
   }
-    
 }
 
-
-
 export async function getAppointmentbyDoctor({
-  doctor_id
-  
+  doctor_id,
 }: {
-  
   doctor_id: string;
-      
 }) {
   try {
     connectToDb();
     // find out if the same appointment exists
     const data = await appointment.find({
-      doctor_id
+      doctor_id,
     });
 
     return data;
-  }catch(error: any){
+  } catch (error: any) {
     console.log(error);
     throw new Error(`Failed to find appointment: ${error.message}`);
-
   }
-    
 }
