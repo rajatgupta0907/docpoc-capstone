@@ -86,3 +86,19 @@ export async function saveSpecialtyToDoctor({
 
 
 
+
+
+
+export async function fetchDoctorById(userId: string) {
+  try {
+    connectToDb();
+    const data =  await Doctor.findOne({ id: userId });
+    if(data){
+      return data;
+    }else{
+      return null;
+    }
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
+  }
+}

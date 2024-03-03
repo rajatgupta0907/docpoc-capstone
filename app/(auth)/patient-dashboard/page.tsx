@@ -3,6 +3,8 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import PatientDashboardShared  from "@/components/shared/patientdashboardshared";
+import Link from 'next/link';
+import NavBars from "@/components/navbars/NavBars";
 const Page = async ({ searchParams }: any) => {
 
   const user = await currentUser();
@@ -22,9 +24,12 @@ const Page = async ({ searchParams }: any) => {
   }
   
   return (
-    <>
+      <div className="bg-white">
+
+      <NavBars />
+
       <PatientDashboardShared  search= {4}/>
-    </>
+      </div>
   );
 };
 export default Page;

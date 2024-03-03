@@ -1,6 +1,7 @@
 "use server";
 import appointment from "../models/appointment.model";
 import { connectToDb } from "../mongoose";
+import {ObjectId } from 'mongodb';
 import { revalidatePath } from "next/cache";
 import EmailUtil, { EmailOptions } from "../nodemailer";
 import { clerkClient } from "@clerk/nextjs/server";
@@ -25,6 +26,7 @@ async function sendEmail({
   };
   return emailUtil.sendEmail(emailOptions);
 }
+
 export async function createAppointment({
   doctor_id,
   patient_id,
@@ -74,4 +76,137 @@ export async function createAppointment({
     console.log(error);
     throw new Error(`Failed to create appointment: ${error.message}`);
   }
+}
+
+
+
+export async function rescheduleAppointment({
+  doctor_id,
+  patient_id,
+  appointment_date,
+  appointment_time,
+  prev_id,
+}: {
+  doctor_id: string;
+  patient_id: string;
+  appointment_date: string;
+  appointment_time: string;
+  prev_id: string;
+}) {
+  try {
+    connectToDb();
+    // find out if the same appointment exists
+    const data = await appointment.findOne({
+      doctor_id,
+      patient_id,
+      appointment_date,
+      appointment_time,
+    });
+    if (data) {
+      throw new Error("Appointment already exists");
+    }
+    const appt = new appointment({
+      doctor_id,
+      patient_id,
+      appointment_date,
+      appointment_time,
+    });
+    await appt.save();
+    const query = { _id:prev_id };
+
+    const result = await appointment.findOneAndDelete(query);
+    console.log(result);
+    revalidatePath('/appointments');
+    const emailOfDoctor = await getUserEmail(doctor_id);
+    const emailOfPatient = await getUserEmail(patient_id);
+    console.log(emailOfDoctor, emailOfPatient);
+    //
+    await sendEmail({
+      to: emailOfDoctor,
+      subject: "New Appointment",
+      text: `You have a new appointment at ${appointment_date} ${appointment_time}`,
+    });
+    await sendEmail({
+      to: emailOfPatient,
+      subject: "New Appointment",
+      text: `You have a new appointment at ${appointment_date} ${appointment_time}`,
+    });
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(`Failed to create appointment: ${error.message}`);
+  }
+}
+
+
+export async function deleteAppointment({_id}:{
+  _id: string
+}){
+  console.log(_id);
+  try {
+    connectToDb();
+    let deleteapp = {
+      _id: _id
+    };
+    const data = await appointment.findOneAndDelete({
+      deleteapp
+    });
+    if(data){
+      return true;
+    }else{
+      return false;
+    }
+
+  }catch(error: any){
+    console.log('error'+ error.message);
+  }
+}
+
+export async function getAppointmentbyPatient({
+  patient_id
+  
+}: {
+  
+  patient_id: string;
+      
+}) {
+  try {
+    connectToDb();
+    // find out if the same appointment exists
+    const data = await appointment.find({
+      patient_id
+    });
+
+    return data;
+  }catch(error: any){
+    console.log(error);
+    throw new Error(`Failed to find appointment: ${error.message}`);
+
+  }
+    
+}
+
+
+
+export async function getAppointmentbyDoctor({
+  doctor_id
+  
+}: {
+  
+  doctor_id: string;
+      
+}) {
+  try {
+    connectToDb();
+    // find out if the same appointment exists
+    const data = await appointment.find({
+      doctor_id
+    });
+
+    return data;
+  }catch(error: any){
+    console.log(error);
+    throw new Error(`Failed to find appointment: ${error.message}`);
+
+  }
+    
 }

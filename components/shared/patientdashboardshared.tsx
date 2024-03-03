@@ -19,7 +19,7 @@ const PatientDashboardShared  = ({ search }: Params) => {
 
   return (
     <>
-      <h1 className="text-white text-3xl">Find Your Doctor Now</h1>
+      <h1 className="text-black text-3xl">Find Your Doctor Now</h1>
       <div className="flex flex-row items-center">
         <DoctorFilter setDoctors={setDoctors} page={page} perPage={perPage} />
       </div>

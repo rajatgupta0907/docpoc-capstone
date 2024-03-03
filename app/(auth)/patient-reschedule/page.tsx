@@ -1,16 +1,40 @@
 "use client";
+import { fetchDoctor } from "@/lib/actions/admin.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { currentUser } from "@clerk/nextjs";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import { currentUser } from "@clerk/nextjs";
 import { useClerk } from "@clerk/nextjs";
-import { createAppointment } from "@/lib/actions/appointment.actions";
-const Page = ({ params }: { params: { id: string } }) => {
-  // const params = useParams();
-  const clerk = useClerk();
-  const currentUser = clerk.user;
-  console.log(params.id);
-  const events = [
+import { rescheduleAppointment } from "@/lib/actions/appointment.actions";
+
+import { useSearchParams } from 'next/navigation'
+const Page =   ( {context}: any) => {
+    const clerk = useClerk();
+    const currentUser = clerk.user;
+  
+    const router = context;
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');
+    const doctor_id = searchParams.get('doctor_id');
+    const patient_id = searchParams.get('patient_id');
+    const doctor_name = searchParams.get('doctor_name');
+    const patient_name = searchParams.get('patient_name');
+    const appointment_date = searchParams.get('appointment_date');
+    const appointment_time= searchParams.get('appointment_time');
+
+        console.log('ID:', id);
+console.log('Doctor ID:', doctor_id);
+console.log('Patient ID:', patient_id);
+console.log('Doctor Name:', doctor_name);
+console.log('Patient Name:', patient_name);
+console.log('Appointment Date:', appointment_date);
+console.log('Appointment Time:', appointment_time);
+let rescheduleAppointments = {
+    id: id
+}
+  
+const events = [
     {
       title: "Meeting",
       start: "2024-02-21T09:00:00",
@@ -28,7 +52,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     },
   ];
 
-  const handleEventClick = async (arg: any) => {
+const handleEventClick = async (arg: any) => {
     const clickedDate = arg.date;
     console.log(currentUser?.id);
     if (clickedDate < new Date()) {
@@ -39,29 +63,29 @@ const Page = ({ params }: { params: { id: string } }) => {
       console.log(
         currentUser?.id +
           " " +
-          params.id +
+          doctor_id +
           " " +
           formattedDate +
           " " +
           formattedTime
       );
       const appointmentObject = {
-        doctor_id: params.id,
+        doctor_id: doctor_id || '',
         patient_id: currentUser!.id,
         appointment_date: formattedDate,
         appointment_time: formattedTime,
+        prev_id: id || ''
         
       };
       try {
-        await createAppointment(appointmentObject);
+        await rescheduleAppointment(appointmentObject);
       } catch (err: any) {
         alert(err.message);
       }
       console.log(appointmentObject);
     }
   };
-
-  const handleSlotLabelMount = (arg: any) => {
+const handleSlotLabelMount = (arg: any) => {
     const rowEl = arg.el.closest(".fc-timegrid-slots tr") as HTMLElement | null; // Find the closest row element
     const rowEl1 = arg.el.closest(
       ".fc-timeGridWeek-view"
@@ -72,7 +96,9 @@ const Page = ({ params }: { params: { id: string } }) => {
   }; // Run this effect only once after initial render
 
   return (
-    <>
+      <div className="">
+
+        
       <FullCalendar
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
@@ -94,8 +120,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           return `${hour}:00 - ${hour + 1}:00`; // Format slot label as "9:00 - 10:00"
         }} // Custom slot label format
       />
-    </>
+      </div>
   );
 };
-
 export default Page;
