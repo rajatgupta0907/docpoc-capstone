@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import styles from '/globals.css'; 
 
 interface Params {
   id: string; 
@@ -24,11 +25,11 @@ export default function DisplayDoctors({
 
   let a = 5;
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-[25px] p-[25px]">
+    <div className=" dd_cards w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-[25px] p-[25px]">
       {" "}
       {/* Added margin */}
       <Link href="#">
-        <img className="p-8 rounded-t-lg" src={image} alt="product image" />
+        <img className="rounded-t-l" src={image} alt="product image" />
       </Link>
       <div className="px-5 pb-5">
         <Link href="#">
@@ -96,7 +97,7 @@ export default function DisplayDoctors({
         <div className="flex items-center justify-between">
           <Link
             href={`/details-doctor/${id}`}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="btn_booknow text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Book Now
           </Link>
