@@ -2,7 +2,7 @@
 import DisplayDoctors from "@/components/cards/DisplayDoctors";
 import { useState } from "react";
 import DoctorFilter from "@/components/forms/DoctorFilter";
-import styles from '/globals.css'; 
+
 
 interface Params{
   search: any

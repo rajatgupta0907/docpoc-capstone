@@ -2,7 +2,6 @@
 import DisplayDetailedDoctors from '@/components/cards/DisplayDetailedDoctors';
 import { detailsfetchdoctor } from '@/lib/actions/admin.actions';
 import Link from 'next/link';
-import styles from '/globals.css'; 
 import NavBar from '@/components/shared/navbar';
 import { Phone } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from '/globals.css'; 
+
 
 interface Params {
   id: string; 
