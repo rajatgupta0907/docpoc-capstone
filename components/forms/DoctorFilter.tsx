@@ -26,7 +26,7 @@ import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { getDoctor } from "@/lib/actions/admin.actions";
 import { fetchDoctors } from "@/lib/actions/doctor.actions";
-import styles from '/globals.css'; 
+
 type Inputs = z.infer<typeof DoctorSearchValidation>;
 
 const DoctorFilter = ({ setDoctors, perPage, page }: any) => {

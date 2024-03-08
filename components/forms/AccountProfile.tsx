@@ -7,7 +7,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import styles from '/globals.css'; 
 
 import {
   Form,
