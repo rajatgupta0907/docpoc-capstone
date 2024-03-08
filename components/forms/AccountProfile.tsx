@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+
 import {
   Form,
   FormControl,
@@ -106,14 +107,14 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
   return (
     <Form {...form}>
       <form
-        className='flex flex-col justify-start gap-10'
+        className='ob_form flex flex-col justify-start gap-10'
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
           name='profile_photo'
           render={({ field }) => (
-            <FormItem className='flex items-center gap-4'>
+            <FormItem className='ob_form_image flex items-center gap-4'>
               <FormLabel className='account-form_image-label'>
                 {field.value ? (
                   <Image
@@ -158,6 +159,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
               <FormControl>
                 <Input
                   type='text'
+                  
                   className='account-form_input no-focus'
                   {...field}
                 />

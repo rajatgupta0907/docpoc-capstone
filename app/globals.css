@@ -192,3 +192,224 @@ footer {
   z-index: 1;
   opacity: 1 !important;
 } */
+
+
+/* Onboarding*/
+.ob_main{
+  background-color: rgb(97, 173, 194);
+  height: 100%;
+  margin-top: 40px;
+  border-radius: 20px;
+  border: 0.3px solid black;
+}
+.ob_main h1{
+  font-size: 40px;
+}
+.ob_main p{
+  font-size: 25px;
+}
+/*onboarding form*/
+.ob_form_image Image{
+border: 1px solid black;
+}
+.ob_form input{
+border: 1px solid black;
+height: 45px;
+}
+.ob_form textarea{
+border: 1px solid black;
+height: 70px;
+
+}
+.ob_form label{
+font-size: 20px;
+
+}
+.ob_form button{
+  font-size: 22px;
+  border: 2px solid black;
+  padding: 10px;
+  width: 30vh;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+}
+.ob_form button:hover{
+  border: 2px solid white;
+}
+
+/* patient dashboard*/
+
+
+/*doctor filter*/
+.df_form select{
+  background-color: rgb(255, 255, 255);
+  width: 150vh;
+  height: 7vh;
+  align-items: center;
+  justify-content: center;
+  margin-left: 35%;
+  border-bottom: black 1px solid;
+
+  
+}
+.df_form button{
+  margin-left: 50px;
+  border-bottom: 2px solid black;
+  height: 7vh;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.df_form button:hover{
+  border-radius: 15px;
+  background-color: rgb(114, 114, 114);
+  color: white;
+}
+.df_formContainer {
+  display: flex;
+  
+}
+
+/*display doctor cards*/
+.dd_cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  border-radius: 0.5rem; 
+  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.dd_cards img {
+  width: 100%; 
+  height: 200px; 
+  object-fit: cover;
+ 
+}
+
+.dd_cards h5 {
+  color: #1a202c; 
+ 
+}
+.dd_cards svg {
+  fill: #fbbf24; 
+}
+
+.dd_cards p {
+  color: #4a5568; 
+  margin-bottom: 1rem; 
+}
+
+
+.dd_cards a {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: capitalize;
+
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.btn_booknow{
+margin-left: auto;
+margin-right: auto;
+  background-color: rgb(82 186 213);
+  border: 0.5px solid black;
+
+}
+.btn_booknow a:hover{
+  display: inline;
+  background-color: rgb(72, 167, 191);
+}
+
+/* doctor detail*/
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f3f4f6; 
+  padding: 2rem;
+}
+.container h1{
+  color: black;
+}
+
+.doc_det_container {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  width: fit-content;
+  display: flex;
+  
+}
+
+.doc_det_container img {
+  width: fit-content;
+  height: auto;
+  flex:40%;
+}
+
+.doctor_info h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.doctor_info p {
+  font-size: 1.25rem;
+  color: #4b5563;
+}
+.doctor_info_btn {
+  font-size: 1.25rem;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(82 186 213);
+  border: 0.5px solid black;
+  border-radius: 15px;
+}
+.doctor_info_btn:hover{
+ 
+  background-color: rgb(70, 160, 183);
+  
+}
+.doctor_info {
+ flex: 60%;
+ margin-left: 150px;
+ background-color: #ffffff;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ border-radius: 0.5rem;
+ height: fit-content;
+ width: 400px;
+ padding: 50px;
+}
+
+/* calender*/
+.cal_appt {
+  color: black;
+
+}
+.cal_appt td{
+  
+  border: 1px solid black;
+
+}
+
+.cal_appt th{
+  color: black;
+  background-color: #ffffff;
+  border: 1px solid black;
+
+}
+th:hover
+ {
+  background-color: #4a5568;
+   color:#000; 
+}
+
+.cal_allday{
+  text-transform: capitalize;
+  color: red;
+}

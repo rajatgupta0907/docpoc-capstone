@@ -3,8 +3,11 @@ import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { currentUser } from "@clerk/nextjs";
+
 import { useClerk } from "@clerk/nextjs";
 import { createAppointment } from "@/lib/actions/appointment.actions";
+import NavBar from "@/components/shared/navbar";
+
 const Page = ({ params }: { params: { id: string } }) => {
   // const params = useParams();
   const clerk = useClerk();
@@ -73,7 +76,12 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <FullCalendar
+    <NavBar />
+    <div className="cal_appt" style={{ backgroundColor: 'white', height: '100%', width: '100%' }}>
+          
+      <FullCalendar 
+      allDayClassNames="cal_allday"
+        dayCellClassNames="cell"
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
         headerToolbar={{
@@ -81,7 +89,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           center: "",
           end: "today prev next",
         }}
-        height="500px" // Set calendar height to 100% of viewport height
+        height="400px" // Set calendar height to 100% of viewport height
         contentHeight="auto" // Allow calendar to determine its own height based on content
         events={events}
         dateClick={handleEventClick}
@@ -94,6 +102,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           return `${hour}:00 - ${hour + 1}:00`; // Format slot label as "9:00 - 10:00"
         }} // Custom slot label format
       />
+      </div>
     </>
   );
 };

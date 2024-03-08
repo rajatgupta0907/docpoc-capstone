@@ -26,6 +26,7 @@ import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { getDoctor } from "@/lib/actions/admin.actions";
 import { fetchDoctors } from "@/lib/actions/doctor.actions";
+
 type Inputs = z.infer<typeof DoctorSearchValidation>;
 
 const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
@@ -75,7 +76,7 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
     console.log("first");
   };
   return (
-    <div className="text-black">
+    <div className="df_form text-black">
       <form onSubmit={handleSubmit(processForm)} className="w-2/3 space-y-6">
         <div>
           <input
@@ -87,14 +88,15 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
             <p className="text-sm text-red-400">{errors.name.message}</p>
           )}
         </div>
-        <div>
+        <div className="df_formContainer">
           {/* <input
             placeholder="name"
             className="rounded-lg text-black"
             {...register("specialty")}
           /> */}
           <select id="" {...register("specialty")}>
-            <option value={""}>{""}</option>
+          <option value="" selected disabled>Select your specialty</option>
+           
             {DoctorTypes.map((item, index) => (
               <option key={index} value={item}>
                 {item}
@@ -104,10 +106,11 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
           {errors.specialty?.message && (
             <p className="text-sm text-red-400">{errors.specialty.message}</p>
           )}
-        </div>
+        
         <button type="submit" onClick={handleSubmit(processForm)}>
           Submit
         </button>
+        </div>
       </form>
     </div>
   );

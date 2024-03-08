@@ -3,6 +3,7 @@ import DisplayDoctors from "@/components/cards/DisplayDoctors";
 import { useState } from "react";
 import DoctorFilter from "@/components/forms/DoctorFilter";
 
+
 interface Params{
   search: any
 }
