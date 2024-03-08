@@ -107,12 +107,12 @@ height: 250px;
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
 /* .navbar_with_image {
   background-image: url("/assets/images/Main_homepage.jpg");

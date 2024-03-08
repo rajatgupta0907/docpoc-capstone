@@ -142,9 +142,7 @@ export async function deleteAppointment({ _id }: { _id: string }) {
     let deleteapp = {
       _id: _id,
     };
-    const data = await appointment.findById({
-      deleteapp,
-    });
+    const data = await appointment.findById(deleteapp);
     const emailOfDoctor = await getUserEmail(data.doctor_id);
     const emailOfPatient = await getUserEmail(data.patient_id);
     await sendEmail({
