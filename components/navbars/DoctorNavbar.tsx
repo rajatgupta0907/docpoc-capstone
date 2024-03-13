@@ -11,8 +11,7 @@ function DoctorNavbar() {
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
-              {/* LOGO */}
-              <Link href="/">
+              <Link href="/doctor-dashboard">
                 <h2 className="text-2xl text-white-600 font-bold ">DOC POC</h2>
               </Link>
               {/* HAMBURGER BUTTON FOR MOBILE */}
@@ -54,16 +53,6 @@ function DoctorNavbar() {
                 Contact Us
                 </Link>
             </li>
-            {/* <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#contact" onClick={() => setNavbar(!navbar)}>
-                Contact
-                </Link>
-            </li> */}
-            {/* <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#projects" onClick={() => setNavbar(!navbar)}>
-                Projects
-                </Link>
-            </li> */}
 
             <li className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
                 <Link href="#getstarted" onClick={() => setNavbar(!navbar)}>

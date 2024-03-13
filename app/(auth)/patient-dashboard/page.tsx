@@ -19,8 +19,7 @@ const Page = async ({ searchParams }: any) => {
     redirect('/patientordoctor');
   
   }else if(fetchDoctors){
-    // doctors is here
-    // redirect()
+    redirect("/doctor-dashboard");
   }
   
   return (

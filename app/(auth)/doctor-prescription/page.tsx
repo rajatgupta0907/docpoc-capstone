@@ -8,6 +8,7 @@ import { fetchUser } from "@/lib/actions/user.actions";
 
 import appointment from "@/lib/models/appointment.model";
 import { fetchDoctor } from "@/lib/actions/admin.actions";
+import DoctorPrescriptionSend from "@/components/shared/DoctorPrescriptionSend";
 const Page = async ({ searchParams }: any) => {
 
     
@@ -69,7 +70,7 @@ console.log(newAppointment);
       <div className="mt-[50px] pt-[50px]"></div>
       {newAppointment.map(appointment => (
         
-      <DoctorAppointMentShow 
+      <DoctorPrescriptionSend 
       id={appointment.id}
       doctor_id = {appointment.doctor_id}
       patient_id = {appointment.patient_id}
