@@ -31,6 +31,7 @@ export async function fetchDoctor(userId: string) {
     connectToDb();
     const data = await doctor.findOne({ id: userId });
     if (data) {
+      console.log("FETCH_DOCTOR",data)
       return data;
     } else {
       return null;

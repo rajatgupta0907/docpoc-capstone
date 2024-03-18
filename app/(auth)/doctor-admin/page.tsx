@@ -10,18 +10,18 @@ async function Page() {
 
   const userInfo = await fetchDoctor(user.id);
   if (userInfo?.onboarded) redirect("/");
-
   const userData = {
     id: user.id,
     objectId: userInfo?._id,
     username: userInfo ? userInfo?.username : user.username,
     name: userInfo ? userInfo?.name : user.firstName ?? "",
-    bio: userInfo ? userInfo?.bio : "",
+    bio: userInfo.bio.length > 0 ? userInfo.bio : "",
     image: userInfo ? userInfo?.image : user.imageUrl,
-    phonenumber: userInfo ? userInfo?.phonenumber : "",
+    phonenumber: userInfo.phonenumber.length > 0 ? userInfo.phonenumber : "",
     isVerified: userInfo ? userInfo?.isVerified : "",
     speciality: userInfo ? userInfo?.speciality : "",
   };
+  console.log("USER_INFO", userData);
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20 text-black">

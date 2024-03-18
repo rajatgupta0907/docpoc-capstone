@@ -68,7 +68,7 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
         : "Please select your speciality",
     },
   });
-
+  console.log("DOCTOR_PROFILE", doctor);
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     const blob = values.profile_photo;
 
