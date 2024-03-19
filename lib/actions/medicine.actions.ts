@@ -46,3 +46,46 @@ interface Params {
       return false;
     }
   }
+
+
+  
+  export async function getMedicinesByPatient({
+    patient_id,
+  }: {
+    patient_id: string;
+  }) {
+    try {
+      connectToDb();
+      // find out if the same appointment exists
+      const data = await Medicines.find({
+        patient_id,
+      });
+  
+      return data;
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(`Failed to find appointment: ${error.message}`);
+    }
+  }
+
+
+  
+  export async function fetchbymedicinesappointment({
+    id
+  }: {
+    id: string;
+  }) {
+    try {
+      connectToDb();
+      // find out if the same appointment exists
+      const data = await Medicines.find({
+        _id: id
+      });
+      console.log(data);
+      return data;
+      
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(`Failed to find appointment: ${error.message}`);
+    }
+  }
