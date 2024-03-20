@@ -29,7 +29,8 @@ interface Params {
         doctorid: doctor_id,
         uniqueappointmentid: uniqueaptid,
         typeofdisease: typeofdisease,
-
+        description: description,
+        patientname: name,
         medicines: medicines.map((medicine: any) => ({
           medicinename: medicine.name,
           medicinetype: medicine.doseType,
