@@ -1,11 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useClerk } from "@clerk/nextjs";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { deleteAppointment } from "@/lib/actions/appointment.actions";
-import { redirect } from "next/navigation";
-
+import { useEffect } from "react";
+import io from "socket.io-client";
 const Page = ({ context }: any) => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -15,6 +11,29 @@ const Page = ({ context }: any) => {
   console.log("ID:", id);
   console.log("Doctor ID:", doctor_id);
   console.log("Patient ID:", patient_id);
+  console.log("here");
+  useEffect(() => {
+    const socket = io("http://localhost:3001"); // Connect to the server
+    console.log(socket);
+    socket.on("connection", () => {
+      console.log("Connected to server");
+
+      // Emit a message to the server
+      socket.emit("send:message", {
+        senderId: id,
+        receiverId: doctor_id || patient_id, // Depending on whether it's a doctor or patient
+        message: "Hello, I need help.",
+      });
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from server");
+    });
+
+    return () => {
+      socket.disconnect(); // Clean up the socket connection when the component unmounts
+    };
+  }, [id, doctor_id, patient_id]);
 
   return (
     <div className="text-black">
