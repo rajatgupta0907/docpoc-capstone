@@ -60,6 +60,14 @@ const MyAppointMentShow = ({id,doctor_id,patient_id,appointment_date,appointment
         className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
             Cancel Appointment
         </Link>
+        <br></br>
+        <br></br>
+        
+        <Link
+        href={`/send-review/${doctor_id}`}
+        className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Send Review
+        </Link>
         </div>
     </div>
     </div>

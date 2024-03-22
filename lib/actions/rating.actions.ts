@@ -1,43 +1,33 @@
 "use server";
 
-import { FilterQuery, SortOrder } from "mongoose";
-import { revalidatePath } from "next/cache";
-
-import doctor from "../models/doctor.model";
 import { connectToDb } from "../mongoose";
 
-import Medicines from "../models/medicines.model";
+import rating from "../models/rating.model";
 
 interface Params {
     formData: FormData;
   }
   
 
-  export async function createMedicines(formData: FormData): Promise<boolean> {
+  export async function createRating(formData: FormData): Promise<boolean> {
     try {
         connectToDb();
       const name = formData.get('name') as string;
       const description = formData.get('description') as string;
-      const medicines = JSON.parse(formData.get('medicines') as string);
-      const uniqueaptid = formData.get("uniqueaptid") as string;
       const doctor_id = formData.get("doctor_id") as string;
       const patient_id = formData.get("patient_id") as string;
-    const typeofdisease= formData.get("typeofdisease") as string;
-      // Save the data to MongoDB
-      await Medicines.create({
-        patientid: patient_id,
-        doctorid: doctor_id,
-        uniqueappointmentid: uniqueaptid,
-        typeofdisease: typeofdisease,
+      const newratingString = formData.get("rating") as string;
+      const newrating = parseInt(newratingString);
+      console.log(newrating);
+      await rating.create({
+        patient_id: patient_id,
+        doctor_id: doctor_id,
+        rating: newrating,
         description: description,
-        patientname: name,
-        medicines: medicines.map((medicine: any) => ({
-          medicinename: medicine.name,
-          medicinetype: medicine.doseType,
-          medicineqty: medicine.totalTablets
-        }))
-
+        name: name
       });
+
+    
   
 
       return true;
@@ -50,7 +40,7 @@ interface Params {
 
 
   
-  export async function getMedicinesByPatient({
+  export async function getRatingByPatient({
     patient_id,
   }: {
     patient_id: string;
@@ -58,7 +48,7 @@ interface Params {
     try {
       connectToDb();
       // find out if the same appointment exists
-      const data = await Medicines.find({
+      const data = await rating.find({
         patient_id,
       });
   
@@ -69,24 +59,25 @@ interface Params {
     }
   }
 
-
   
-  export async function fetchbymedicinesappointment({
-    id
+  export async function getRatingByDoctor({
+    doctor_id,
   }: {
-    id: string;
+    doctor_id: string;
   }) {
     try {
       connectToDb();
       // find out if the same appointment exists
-      const data = await Medicines.find({
-        _id: id
+      const data = await rating.find({
+        doctor_id,
       });
-      console.log(data);
+  
       return data;
-      
     } catch (error: any) {
       console.log(error);
       throw new Error(`Failed to find appointment: ${error.message}`);
     }
   }
+
+
+  
