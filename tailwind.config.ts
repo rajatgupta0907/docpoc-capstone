@@ -19,10 +19,13 @@ const config = {
     },
 
     extend: {
+      screens: {
+        mobile: "320px",
+      },
       colors: {
         border: "hsl(var(--border))",
         "blue-egg": "#77D5EE",
-        "blue-egg-dark":"#52BAD5",
+        "blue-egg-dark": "#52BAD5",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
