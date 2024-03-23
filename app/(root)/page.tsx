@@ -25,7 +25,7 @@ export default function Home() {
           <NavBar />
         </div>
         <section className="flex-[9] flex justify-center items-start flex-col align-center w-4/4 mx-60 mt-20">
-          <p className="text-heading3-chat-with-doctor">
+          <p className="text-heading3-chat-with-doctor mobile:text-black">
             Doctor In Your Pocket
           </p>
           <p className="text-heading2-paragraph">

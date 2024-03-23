@@ -1,42 +1,37 @@
-const express = require("express");
 const http = require("http");
-const socketIo = require("socket.io");
+const { Server } = require("socket.io");
 const cors = require("cors");
 
-const app = express();
-const server = http.createServer(app);
-const io = require("socket.io")(server, {
+const httpServer = http.createServer();
+
+const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000", // Replace with your frontend URL
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
   },
 });
 
-
 io.on("connection", (socket) => {
-  console.log("A user connected");
+  console.log("A user connected:", socket.id);
+  // socket.on("join_room", (roomId) => {
+  //   socket.join(roomId);
+  //   console.log(`user with id-${socket.id} joined room - ${roomId}`);
+  // });
 
-  socket.on("send:message", ({ senderId, receiverId, message }) => {
-    console.log(
-      `Message received from sender ${senderId} to receiver ${receiverId}: ${message}`
-    );
-
-    // Check if both senderId and receiverId are valid
-    if (senderId && receiverId) {
-      // Emit the message to the receiver
-      socket.broadcast.emit(`receive:message:${receiverId}`, {
-        senderId,
-        message,
-      });
-    }
+  socket.on("send_msg", (data) => {
+    console.log(data, "DATA");
+    //This will send a message to a specific room ID
+    socket.emit("receive_msg", data);
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    console.log("A user disconnected:", socket.id);
   });
 });
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+httpServer.listen(PORT, () => {
+  console.log(`Socket.io server is running on port ${PORT}`);
 });
