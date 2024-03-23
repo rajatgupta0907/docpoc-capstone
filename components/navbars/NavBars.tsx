@@ -48,6 +48,11 @@ function NavBars() {
                 Your Appointment
                 </Link>
             </li>
+            <li className="pb-6 text-xl text-white-600 py-2 md:px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
+                <Link href="/my-prescriptions" onClick={() => setNavbar(!navbar)}>
+                Your Prescription
+                </Link>
+            </li>
             <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
                 <Link href="#blog" onClick={() => setNavbar(!navbar)}>
                 Contact Us

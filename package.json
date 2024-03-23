@@ -24,6 +24,8 @@
     "bufferutil": "^4.0.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "lucide-react": "^0.316.0",
     "mongodb": "^6.3.0",
     "mongodb-client-encryption": "^6.0.0",
