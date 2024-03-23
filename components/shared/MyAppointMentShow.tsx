@@ -69,7 +69,6 @@ const MyAppointMentShow = ({
                 doctor_name: doctor_name,
                 patient_name: patient_name,
                 appointment_date: appointment_date.toLocaleDateString(),
-
                 appointment_time: appointment_time,
               },
             }}
@@ -90,22 +89,6 @@ const MyAppointMentShow = ({
           >
             Start a Chat
           </Link>
-
-                appointment_time: appointment_time
-            }
-        }}
-        className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Cancel Appointment
-        </Link>
-        <br></br>
-        <br></br>
-        
-        <Link
-        href={`/send-review/${doctor_id}`}
-        className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Send Review
-        </Link>
-
         </div>
       </div>
     </div>
