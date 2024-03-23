@@ -1,67 +1,69 @@
 "use client";
-import { redirect, useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import styles from "./page.module.css";
+
 import io from "socket.io-client";
-import { useAuth } from "@clerk/clerk-react";
+import ChatPage from "@/components/chat-page/ChatPage";
+import { useAuth } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 const Page = ({ context }: any) => {
-  const [socket, setSocket] = useState<any>(null);
-  const [messages, setMessages] = useState<string[]>([]);
-  const [messageInput, setMessageInput] = useState("");
   const searchParams = useSearchParams();
-  const { userId } = useAuth();
-  if (!userId) redirect("/");
-  const myId = userId;
   const id = searchParams.get("id");
   const doctor_id = searchParams.get("doctor_id");
   const patient_id = searchParams.get("patient_id");
+  const { userId } = useAuth();
+  const [showChat, setShowChat] = useState(true);
+  const [userName, setUserName] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [roomId, setroomId] = useState("");
+  const router = useRouter();
+  var socket: any;
+  socket = io("http://localhost:3001");
 
-  console.log("MY_ID:", myId);
-  console.log("APPOINTMENT_ID:", id);
-  console.log("Doctor ID:", doctor_id);
-  console.log("Patient ID:", patient_id);
+  const sender = userId;
+  const receiver = doctor_id === userId ? patient_id : doctor_id;
+  console.log("PATIENT_IDDD", patient_id);
+  console.log("MY IDDD", userId);
 
-  useEffect(() => {
-    const newSocket = io(`:3001`, {
-      path: "/api/chat",
-      addTrailingSlash: false,
-    });
-    setSocket(newSocket);
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!socket) return;
-
-    socket.on("message", (message: string) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    return () => socket.off("message");
-  }, [socket]);
-
-  const sendMessage = () => {
-    if (!socket || !messageInput.trim()) return;
-
-    socket.emit("message", {
-      appointmentId: id,
-      message: messageInput,
-      doctorId: doctor_id,
-      patientId: patient_id,
-    });
-    setMessageInput("");
-  };
   return (
     <div className="text-black">
-      <h2>Chat With The Patient</h2>
-
-      <div className="max-w-md mx-auto bg-white ">
+      <div
+        className={styles.main_div}
+        style={{ display: showChat ? "none" : "" }}
+      >
         <input
-          value={messageInput}
-          onChange={(e) => setMessageInput(e.target.value)}
+          className={styles.main_input}
+          type="text"
+          placeholder="Username"
+          onChange={(e) => setUserName(e.target.value)}
+          disabled={showSpinner}
         />
-        <button onClick={sendMessage}>Send</button>
+        <input
+          className={styles.main_input}
+          type="text"
+          placeholder="room id"
+          onChange={(e) => setroomId(e.target.value)}
+          disabled={showSpinner}
+        />
+      </div>
+      <div style={{ display: !showChat ? "none" : "" }}>
+        <Button
+          onClick={() => {
+            router.back();
+          }}
+        >
+          Go Back
+        </Button>
+        <ChatPage
+          socket={socket}
+          roomId={roomId}
+          username={userName}
+          sender={sender}
+          receiver={receiver}
+          myId={userId}
+          patientId={patient_id}
+        />
       </div>
     </div>
   );

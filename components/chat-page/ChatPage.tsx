@@ -3,15 +3,14 @@ import React, { useEffect, useState } from "react";
 import style from "./chat.module.css";
 
 interface IMsgDataTypes {
-  roomId: String | number;
-  user: String;
   msg: String;
   sender: String;
   receiver: String;
   time: String;
+  patientId: String;
 }
 
-const ChatPage = ({ socket, username, roomId, sender, receiver }: any) => {
+const ChatPage = ({ socket, sender, receiver, myId, patientId }: any) => {
   const [currentMsg, setCurrentMsg] = useState("");
   const [chat, setChat] = useState<IMsgDataTypes[]>([]);
 
@@ -19,11 +18,10 @@ const ChatPage = ({ socket, username, roomId, sender, receiver }: any) => {
     e.preventDefault();
     if (currentMsg !== "") {
       const msgData: IMsgDataTypes = {
-        roomId,
-        user: username,
         msg: currentMsg,
         sender: sender,
         receiver: receiver,
+        patientId,
         time:
           new Date(Date.now()).getHours() +
           ":" +
@@ -35,36 +33,46 @@ const ChatPage = ({ socket, username, roomId, sender, receiver }: any) => {
   };
 
   useEffect(() => {
-    socket.on("receive_msg", (data: IMsgDataTypes) => {
-      setChat((pre) => [...pre, data]);
+    socket.on("receive_msg", (data: [IMsgDataTypes]) => {
+      console.log(data);
+      console.log("MYID", myId);
+      setChat((pre) => [...data]);
     });
   }, [socket]);
-
+  console.log("AM I THE PATIENT??", patientId == myId);
   return (
     <div className={style.chat_div}>
       <div className={style.chat_border}>
-        <div style={{ marginBottom: "1rem" }}>
+        {/* <div style={{ marginBottom: "1rem" }}>
           <p>
-            Name: <b>{username}</b> and Room Id: <b>{roomId}</b>
+            Name: <b>patientId:{patientId}</b>{" "}
           </p>
-        </div>
+          <p>
+            Name: <b>sender:{sender}</b>{" "}
+          </p>
+          <p>
+            Name: <b>receiver:{receiver}</b>{" "}
+          </p>
+          <p>
+            Name: <b>does match?:{sender === myId ? "true" : "false"}</b>{" "}
+          </p>
+        </div> */}
         <div>
-          {chat.map(({ roomId, user, msg, time }, key) => (
+          {chat.map(({ msg, time, sender, patientId }, key) => (
             <div
               key={key}
               className={
-                user == username
-                  ? style.chatProfileRight
-                  : style.chatProfileLeft
+                sender == myId ? style.chatProfileRight : style.chatProfileLeft
               }
             >
-              <span
-                className={style.chatProfileSpan}
-                style={{ textAlign: user == username ? "right" : "left" }}
-              >
-                {user.charAt(0)}
+              <span className={style.chatProfileSpan}>
+                {patientId === sender ? "🤒" : "💊"}
               </span>
-              <h3 style={{ textAlign: user == username ? "right" : "left" }}>
+              <h3
+                className={
+                  patientId === myId ? "text-black" : "text-blue-egg-dark"
+                }
+              >
                 {msg}
               </h3>
             </div>
