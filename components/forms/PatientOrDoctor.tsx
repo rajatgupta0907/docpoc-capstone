@@ -45,41 +45,49 @@ const PatientOrDoctor = ({ userId, username }: Props) => {
   );
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
-      <h1 className="head-text">Welcome to DOCPOC</h1>
-      <h4 className="head-text">Please Select your Specialty Type</h4>
-      <div>
-        <button
-          onClick={() => {
-            setSelectedSpecialty("patient");
-          }}
-        >
-          Patient
-        </button>
-        <button
-          onClick={() => {
-            setSelectedSpecialty("doctor");
-          }}
-        >
-          Doctor
-        </button>
-      </div>
-      {selectedSpecialty && (
-        <button
-          onClick={() =>
-            saveSpecialtyType(
-              selectedSpecialty,
-              username,
-              userId,
-              setShowSuccessMessage
-            )
-          }
-        >
-          Save
-        </button>
-      )}
-      {showSuccessMessage && <p>Specialty type saved successfully!</p>}
-    </main>
+<main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20">
+<img
+    src="/assets/images/doctor.jpg"
+    className="max-w-full h-auto rounded-lg shadow-lg"
+    alt="Doctor"
+  />
+  <h1 className="head-text text-black text-3xl font-bold mb-5">Welcome to DOCPOC</h1>
+  <h4 className="head-text text-lg text-black mb-8">Please Select your Specialty Type</h4>
+  <div className="flex justify-center space-x-8">
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline text-lg uppercase tracking-wide"
+      onClick={() => {
+        setSelectedSpecialty("patient");
+      }}
+    >
+      Patient
+    </button>
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline text-lg uppercase tracking-wide"
+      onClick={() => {
+        setSelectedSpecialty("doctor");
+      }}
+    >
+      Doctor
+    </button>
+  </div>
+  {selectedSpecialty && (
+    <button
+      onClick={() =>
+        saveSpecialtyType(
+          selectedSpecialty,
+          username,
+          userId,
+          setShowSuccessMessage
+        )
+      }
+      className="mt-8 bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline text-lg"
+    >
+      Save
+    </button>
+  )}
+  {showSuccessMessage && <p className="mt-4 text-green-600">Specialty type saved successfully!</p>}
+</main>
   );
 };
 

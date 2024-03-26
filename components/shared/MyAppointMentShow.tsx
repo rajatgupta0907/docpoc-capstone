@@ -89,6 +89,20 @@ const MyAppointMentShow = ({
           >
             Start a Chat
           </Link>
+            <br></br>
+          <Link
+            href={{
+              pathname: "/video",
+              query: {
+                id: id,
+                doctor_id: doctor_id,
+              },
+            }}
+            className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yello-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Start a Video
+          </Link>
+
         </div>
       </div>
     </div>
