@@ -2,17 +2,27 @@
 import Peer from 'peerjs';
 import React, { useState, useEffect, useRef } from 'react';
 import { useClerk } from "@clerk/nextjs";
+import { useSearchParams, usePathname } from 'next/navigation';
 
 export default function Page() {
   const clerk = useClerk();
   const currentUserfromClerk = clerk.user;
   const [peerId, setPeerId] = useState<string>('');
-  const [remotePeerIdValue, setRemotePeerIdValue] = useState<string>('');
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const currentUserVideoRef = useRef<HTMLVideoElement>(null);
   const peerInstance = useRef<Peer | null>(null);
+  const searchParams = useSearchParams();
+  const call = () => {
 
-  const call = (remotePeerId: string) => {
+    const patient_id = searchParams.get("patient_id") || null;
+    const doctor_id = searchParams.get("doctor_id") || null;
+      
+    let remotePeerId="";
+    if (doctor_id) {
+      remotePeerId = doctor_id;
+    } else if (patient_id) {
+      remotePeerId = patient_id;
+    }
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(mediaStream => {
         if (currentUserVideoRef.current) {
@@ -41,6 +51,7 @@ export default function Page() {
 
     const peer = new Peer(currentUserfromClerk.id);
 
+  
     peer.on('open', (id: string) => {
       setPeerId(id);
     });
@@ -81,15 +92,9 @@ export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black">
   <h1 className="text-white text-2xl mb-4">Current user id is {peerId}</h1>
-  <input
-    type="text"
-    value={remotePeerIdValue}
-    onChange={e => setRemotePeerIdValue(e.target.value)}
-    className="mb-4 px-4 py-2 rounded-md border border-white bg-gray-800 text-white focus:outline-none focus:border-blue-500"
-    placeholder="Enter remote peer ID"
-  />
+  
   <button
-    onClick={() => call(remotePeerIdValue)}
+    onClick={() => call()}
     className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
   >
     Call
