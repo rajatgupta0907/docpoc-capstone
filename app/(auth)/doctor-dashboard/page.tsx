@@ -21,7 +21,7 @@ async function Page() {
       <h3 className="bg-white text-black text-lg">Manage Your Profile </h3>
       <div className="p-20 bg-orange-200">
       <h3 className="text-orange-400 font-bold mb-4">Manage Your Appointment</h3>
-      <div className="bg-white rounded-lg shadow-2xl flex  md:flex">
+      <div className="bg-white rounded-lg shadow-2xl flex flex-wrap  md:flex">
         <img src="/assets/images/manage_appointment.png" alt="Appointment" className="md:w-1/3 rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
         <div className="p-6">
 
@@ -42,7 +42,7 @@ async function Page() {
 
     <div className="p-20 bg-orange-200 mt-[-50px]">
       <h3 className="text-orange-400 font-bold mb-4">Manage Your Prescription</h3>
-      <div className="bg-white rounded-lg shadow-2xl flex  md:flex">
+      <div className="bg-white rounded-lg shadow-2xl flex flex flex-wrap  md:flex">
         <img src="/assets/images/manage_appointment.png" alt="Appointment" className="md:w-1/3 rounded-t-lg md:rounded-l-lg md:rounded-t-none" />
         <div className="p-6">
 
