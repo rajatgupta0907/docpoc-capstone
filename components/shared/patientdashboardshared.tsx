@@ -12,7 +12,7 @@ const PatientDashboardShared  = ({ search }: Params) => {
   const [doctors, setDoctors] = useState<any>();
   let page = parseInt(search.page, 10);
   page = !page || page < 1 ? 1 : page;
-  const perPage = 4;
+  const perPage = 100000;
 
   // const user = await currentUser();
   // const totalPages = Math.ceil(data.itemCount / perPage);
@@ -20,11 +20,16 @@ const PatientDashboardShared  = ({ search }: Params) => {
 
   return (
     <>
-      <h1 className="text-black text-3xl">Find Your Doctor Now</h1>
-      <div className="flex flex-row items-center">
-        <DoctorFilter setDoctors={setDoctors} page={page} perPage={perPage} />
-      </div>
-      <div className="flex flex-row space-y-6 items-center">
+    
+<div  className="block mx-auto p-6 bg-white mt-[60px]  item-center border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+<h1 className="text-3xl font-bold text-gray-900 mb-4 md:mb-0 text-cenetr">Find Your Doctor Now</h1>
+<DoctorFilter setDoctors={setDoctors} page={page} perPage={perPage} />
+
+</div>
+
+      <div className="w-full flex flex-wrap mt-10">
+
         {" "}
         {/* Flex container with column layout */}
         {doctors &&
@@ -40,7 +45,7 @@ const PatientDashboardShared  = ({ search }: Params) => {
               isVerified = {item.isVerified}
             />
           ))}
-      </div>
+          </div>
     </>
   );
 };
