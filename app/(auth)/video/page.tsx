@@ -3,25 +3,40 @@ import Peer from 'peerjs';
 import React, { useState, useEffect, useRef } from 'react';
 import { useClerk } from "@clerk/nextjs";
 import { useSearchParams, usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Page() {
   const clerk = useClerk();
-  const currentUserfromClerk = clerk.user;
+  let currentUserfromClerk = clerk.user;
   const [peerId, setPeerId] = useState<string>('');
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const currentUserVideoRef = useRef<HTMLVideoElement>(null);
   const peerInstance = useRef<Peer | null>(null);
   const searchParams = useSearchParams();
+  const patient_ids = searchParams.get("patient_id") || null;
+  const doctor_ids = searchParams.get("doctor_id") || null;
+  let redirection= "";
+
+  if (doctor_ids) {
+    redirection = "/my-appointment";
+  } else if (patient_ids) {
+    redirection = "/doctor-appointment";
+
+  }
   const call = () => {
 
     const patient_id = searchParams.get("patient_id") || null;
     const doctor_id = searchParams.get("doctor_id") || null;
+      let redirection= "";
       
     let remotePeerId="";
     if (doctor_id) {
       remotePeerId = doctor_id;
+      redirection = "/my-appointment";
     } else if (patient_id) {
       remotePeerId = patient_id;
+      redirection = "/doctor-appointment";
+
     }
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(mediaStream => {
@@ -47,8 +62,10 @@ export default function Page() {
   }
 
   useEffect(() => {
-    if (!currentUserfromClerk) return; // Wait until clerk user data is available
 
+    const initializePeer = () => {
+
+    if (!currentUserfromClerk) return; // Wait until clerk user data is available
     const peer = new Peer(currentUserfromClerk.id);
 
   
@@ -78,7 +95,19 @@ export default function Page() {
         });
     });
 
+    
     peerInstance.current = peer;
+  }
+  initializePeer();
+
+
+  const checkClerkId = setInterval(() => {
+    if (currentUserfromClerk?.id) {
+      clearInterval(checkClerkId);
+      initializePeer();
+    }
+  }, 1000);
+
 
     return () => {
       if (peerInstance.current) {
@@ -117,6 +146,17 @@ export default function Page() {
         className="w-full h-auto rounded-md shadow-lg"
       />
     </div>
+  </div>
+  <div>
+  <Link href={
+    `${redirection}`
+  }
+  className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mb-4"
+  
+  >
+    Go Back
+      </Link>
+  
   </div>
 </div>
 

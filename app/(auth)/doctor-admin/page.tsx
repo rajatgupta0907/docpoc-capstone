@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
+import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 import { fetchDoctor } from "@/lib/actions/admin.actions";
 import DoctorProfile from "@/components/forms/DoctorProfile";
 
@@ -25,9 +25,9 @@ async function Page() {
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col justify-start px-10 py-20 text-black">
-      <h1 className="head-text">Doctor Admin Panel</h1>
+      <DoctorNavbar/>
       <p className="mt-3 text-base-regular text-light-2">
-        Complete your profile now, to use Threds.
+        Complete your profile 
       </p>
       <DoctorProfile doctor={userData} btnTitle="Continue" />
 
