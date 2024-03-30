@@ -3,6 +3,9 @@ import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { currentUser } from "@clerk/nextjs";
+import { parse, format } from 'date-fns';
+import { useState, useEffect } from "react";
+import { getAppointmentbyDoctor } from "@/lib/actions/appointment.actions";
 
 import { useClerk } from "@clerk/nextjs";
 import { createAppointment } from "@/lib/actions/appointment.actions";
@@ -13,25 +16,95 @@ const Page = ({ params }: { params: { id: string } }) => {
   const clerk = useClerk();
   const currentUser = clerk.user;
   console.log(params.id);
-  const events = [
-    {
-      title: "Meeting",
-      start: "2024-02-21T09:00:00",
-      end: "2024-02-21T10:00:00",
-    },
-    {
-      title: "Lunch",
-      start: "2024-02-21T12:00:00",
-      end: "2024-02-21T13:00:00",
-    },
-    {
-      title: "Conference",
-      start: "2024-02-22T10:00:00",
-      end: "2024-02-22T15:00:00",
-    },
-  ];
+  let newEvents: any[] = []; // Explicitly declare the type of newEvents
+  const [events, setEvents] = useState<any[]>([]);
+  const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null); // State to store selected date and time
+
+  
+  useEffect(() => {
+    async function fetchAppointments() {
+      try {
+        const newDoctorId = params.id;
+        const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+        const dates = appointments.map((appointment) => appointment.appointment_date);
+        console.log(dates);
+        
+  
+  
+        
+        appointments.forEach((appointment) => {
+      let newDate = new Date(appointment.appointment_date);
+      let convert =newDate.toISOString().slice(0, 10);
+
+    
+      let time= appointment.appointment_time;
+      const parsedTime = parse(time, 'h:mm:ss a', new Date());
+      const formattedTime = format(parsedTime, 'HH:mm:ss');
+      console.log(formattedTime);
+      console.log(convert);
+      newEvents.push({
+              title: "booked",
+              start: convert+"T"+formattedTime,
+              end: convert+"T"+formattedTime,
+
+              color: "red"
+          });
+      });
+
+      setEvents(newEvents);
+      
+        console.log("events");
+        console.log(newEvents);
+  
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    }
+  
+    fetchAppointments();
+  }, []);
+  
 
   const handleEventClick = async (arg: any) => {
+    async function fetchAppointments() {
+      try {
+        const newDoctorId = params.id;
+        const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+        const dates = appointments.map((appointment) => appointment.appointment_date);
+        console.log(dates);
+        
+  
+  
+        
+        appointments.forEach((appointment) => {
+      let newDate = new Date(appointment.appointment_date);
+      let convert =newDate.toISOString().slice(0, 10);
+
+    
+      let time= appointment.appointment_time;
+      const parsedTime = parse(time, 'h:mm:ss a', new Date());
+      const formattedTime = format(parsedTime, 'HH:mm:ss');
+      console.log(formattedTime);
+      console.log(convert);
+      newEvents.push({
+              title: "booked",
+              start: convert+"T"+formattedTime,
+              end: convert+"T"+formattedTime,
+
+              color: "red"
+          });
+      });
+
+      setEvents(newEvents);
+      
+        console.log("events");
+        console.log(newEvents);
+  
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    }
+
     const clickedDate = arg.date;
     console.log(currentUser?.id);
     if (clickedDate < new Date()) {
@@ -57,6 +130,8 @@ const Page = ({ params }: { params: { id: string } }) => {
       };
       try {
         await createAppointment(appointmentObject);
+        fetchAppointments();
+
       } catch (err: any) {
         alert(err.message);
       }

@@ -3,6 +3,7 @@ import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 import { createMedicines } from '@/lib/actions/medicine.actions';
 import React, { useState, FormEvent } from 'react';
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link';
 
 interface Medicine {
   name: string;
@@ -180,7 +181,16 @@ export default function Page() {
       {isLoading ? 'Loading...' : 'Submit'}
     </button>
   </form>
+  <br></br>
+  <Link
+      href={"/doctor-prescription"}
+      className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2 md:ml-0"
+      >
+      Go Back
+    </Link>
+  
 </div>
+
 
 
     </>

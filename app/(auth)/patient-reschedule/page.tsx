@@ -1,105 +1,182 @@
-"use client";
-import { fetchDoctor } from "@/lib/actions/admin.actions";
-import { fetchUser } from "@/lib/actions/user.actions";
-import { currentUser } from "@clerk/nextjs";
+"use client"
+import { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useClerk } from "@clerk/nextjs";
-import { rescheduleAppointment } from "@/lib/actions/appointment.actions";
+import { parse, format } from 'date-fns';
 
-import { useSearchParams } from 'next/navigation'
-const Page =   ( {context}: any) => {
-    const clerk = useClerk();
-    const currentUser = clerk.user;
+import { getAppointmentbyDoctor, rescheduleAppointment } from "@/lib/actions/appointment.actions";
+import { useSearchParams } from 'next/navigation';
+
+const Page = () => {
+  const clerk = useClerk();
+  const currentUser = clerk.user;
+  const searchParams = useSearchParams();
+  const [bookedDates, setBookedDates] = useState<string[]>([]);
+  const [events, setEvents] = useState<any[]>([]);
+  const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null); // State to store selected date and time
+ 
+  let newEvents: any[] = []; // Explicitly declare the type of newEvents
+
+  useEffect(() => {
+    async function fetchAppointments() {
+      try {
+        const newDoctorId = searchParams.get("doctor_id") || "";
+        const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+        const dates = appointments.map((appointment) => appointment.appointment_date);
+        console.log(dates);
+        setBookedDates(dates);
+        
   
-    const router = context;
-    const searchParams = useSearchParams();
-    const id = searchParams.get('id');
-    const doctor_id = searchParams.get('doctor_id');
-    const patient_id = searchParams.get('patient_id');
-    const doctor_name = searchParams.get('doctor_name');
-    const patient_name = searchParams.get('patient_name');
-    const appointment_date = searchParams.get('appointment_date');
-    const appointment_time= searchParams.get('appointment_time');
-
-        console.log('ID:', id);
-console.log('Doctor ID:', doctor_id);
-console.log('Patient ID:', patient_id);
-console.log('Doctor Name:', doctor_name);
-console.log('Patient Name:', patient_name);
-console.log('Appointment Date:', appointment_date);
-console.log('Appointment Time:', appointment_time);
-let rescheduleAppointments = {
-    id: id
-}
   
-const events = [
-    {
-      title: "Meeting",
-      start: "2024-02-21T09:00:00",
-      end: "2024-02-21T10:00:00",
-    },
-    {
-      title: "Lunch",
-      start: "2024-02-21T12:00:00",
-      end: "2024-02-21T13:00:00",
-    },
-    {
-      title: "Conference",
-      start: "2024-02-22T10:00:00",
-      end: "2024-02-22T15:00:00",
-    },
-  ];
+        
+        appointments.forEach((appointment) => {
+      let newDate = new Date(appointment.appointment_date);
+      let convert =newDate.toISOString().slice(0, 10);
 
-const handleEventClick = async (arg: any) => {
+    
+      let time= appointment.appointment_time;
+      const parsedTime = parse(time, 'h:mm:ss a', new Date());
+      const formattedTime = format(parsedTime, 'HH:mm:ss');
+      console.log(formattedTime);
+      console.log(convert);
+      newEvents.push({
+              title: "booked",
+              start: convert+"T"+formattedTime,
+              end: convert+"T"+formattedTime,
+
+              color: "red"
+          });
+      });
+
+      setEvents(newEvents);
+      
+        console.log("events");
+        console.log(newEvents);
+  
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    }
+  
+    fetchAppointments();
+  }, [searchParams]);
+  
+  const handleEventClick = async (arg: any) => {
+
+
     const clickedDate = arg.date;
-    console.log(currentUser?.id);
     if (clickedDate < new Date()) {
       alert("You cannot select a time slot in the past.");
     } else {
       const formattedDate = clickedDate.toLocaleDateString();
       const formattedTime = clickedDate.toLocaleTimeString();
-      console.log(
-        currentUser?.id +
-          " " +
-          doctor_id +
-          " " +
-          formattedDate +
-          " " +
-          formattedTime
-      );
       const appointmentObject = {
-        doctor_id: doctor_id || '',
+        doctor_id: searchParams.get("doctor_id") || '',
         patient_id: currentUser!.id,
         appointment_date: formattedDate,
         appointment_time: formattedTime,
-        prev_id: id || ''
-        
+        prev_id: searchParams.get('id') || ''
       };
       try {
         await rescheduleAppointment(appointmentObject);
+        setSelectedDateTime(clickedDate); // Update selected date and time
+        
+        
+        
+        fetchAppointments();
       } catch (err: any) {
         alert(err.message);
       }
-      console.log(appointmentObject);
     }
   };
-const handleSlotLabelMount = (arg: any) => {
-    const rowEl = arg.el.closest(".fc-timegrid-slots tr") as HTMLElement | null; // Find the closest row element
-    const rowEl1 = arg.el.closest(
-      ".fc-timeGridWeek-view"
-    ) as HTMLElement | null; // Find the closest row element
-    if (rowEl) {
-      rowEl.style.height = "100px"; // Set row height
+
+  async function fetchAppointments() {
+    try {
+      const newDoctorId = searchParams.get("doctor_id") || "";
+      const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+      const dates = appointments.map((appointment) => appointment.appointment_date);
+      console.log(dates);
+      setBookedDates(dates);
+      
+
+
+      
+      appointments.forEach((appointment) => {
+    let newDate = new Date(appointment.appointment_date);
+    let convert =newDate.toISOString().slice(0, 10);
+
+  
+    let time= appointment.appointment_time;
+    const parsedTime = parse(time, 'h:mm:ss a', new Date());
+    const formattedTime = format(parsedTime, 'HH:mm:ss');
+    console.log(formattedTime);
+    console.log(convert);
+    newEvents.push({
+            title: "booked",
+            start: convert+"T"+formattedTime,
+            end: convert+"T"+formattedTime,
+
+            color: "red"
+        });
+    });
+
+    setEvents(newEvents);
+    
+      console.log("events");
+      console.log(newEvents);
+
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
     }
-  }; // Run this effect only once after initial render
+  }
+
+
+
+  const eventContent = (arg: any) => {
+    const isBooked = bookedDates.includes(arg.event.startStr);
+    const isSelected = selectedDateTime && arg.event.startStr === selectedDateTime.toISOString(); // Check if the event is selected
+    let classNames = "";
+
+    // Add custom class based on booking status
+    if (isBooked) {
+      classNames += " booked-event";
+    }
+
+    // Add custom class based on whether the event is selected
+    if (isSelected) {
+      classNames += " selected-event";
+    }
+
+    // Customize additional styles based on event properties
+    const backgroundColor = isBooked ? "red" : (isSelected ? "blue" : "green");
+    const borderColor = isBooked ? "darkred" : (isSelected ? "darkblue" : "darkgreen");
+    const textColor = isBooked ? "white" : "black";
+    const style = {
+      backgroundColor,
+      borderColor,
+      color: textColor
+    };
+
+    return { 
+      className: classNames,
+      style
+    };
+  };
+
+  const handleSlotLabelMount = (arg: any) => {
+    const rowEl = arg.el.closest(".fc-timegrid-slots tr") as HTMLElement | null;
+    if (rowEl) {
+      rowEl.style.height = "100px";
+    }
+  };
 
   return (
-      <div className="">
-
-        
-      <FullCalendar
+    <div className="cal_appt" style={{ backgroundColor: 'white', height: '100%', width: '100%' }}>
+      <FullCalendar 
+        allDayClassNames="cal_allday"
+        dayCellClassNames="cell"
         plugins={[timeGridPlugin, interactionPlugin]}
         initialView="timeGridWeek"
         headerToolbar={{
@@ -107,20 +184,21 @@ const handleSlotLabelMount = (arg: any) => {
           center: "",
           end: "today prev next",
         }}
-        height="500px" // Set calendar height to 100% of viewport height
-        contentHeight="auto" // Allow calendar to determine its own height based on content
-        events={events}
+        height="400px"
+        contentHeight="auto"
         dateClick={handleEventClick}
         slotMinTime="09:00"
         slotMaxTime="17:00"
-        slotDuration="01:00:00" // Set slot duration to 1 hour
+        slotDuration="01:00:00"
         slotLabelDidMount={handleSlotLabelMount}
-        slotLabelContent={(arg: any ) => {
+        events={events}
+        slotLabelContent={(arg: any) => {
           const hour = arg.date.getHours();
-          return `${hour}:00 - ${hour + 1}:00`; // Format slot label as "9:00 - 10:00"
-        }} // Custom slot label format
+          return `${hour}:00 - ${hour + 1}:00`;
+        }}
       />
-      </div>
+    </div>
   );
 };
+
 export default Page;

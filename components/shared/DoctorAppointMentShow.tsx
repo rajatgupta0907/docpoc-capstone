@@ -24,7 +24,7 @@ const DoctorAppointMentShow = ({
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
+    <div className="max-w-md mx-auto flex justify-center bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
       <div className="md:flex">
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
@@ -38,10 +38,10 @@ const DoctorAppointMentShow = ({
           </p>
 
           <p className="mt-2 text-gray-500">{doctor_name}</p>
-          <button className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-            View Details
-          </button>
+         
 
+        <div className="flex flex-col  justify-center">
+          
           <Link
             href={{
               pathname: "/doctor-delete-appointment",
@@ -85,6 +85,7 @@ const DoctorAppointMentShow = ({
           >
             Video
           </Link>
+          </div>
         </div>
       </div>
     </div>
