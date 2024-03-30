@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import { io } from "socket.io-client";
 import { useState } from "react";
 import ChatPage from "@/components/chat-page/ChatPage";
+import { chatUrl } from "@/lib/constants";
 
 export default function Home() {
   const [showChat, setShowChat] = useState(true);
@@ -11,8 +12,7 @@ export default function Home() {
   const [roomId, setroomId] = useState("");
 
   var socket: any;
-  socket = io(process.env.CHAT_URL ?? "locahost:3001");
-
+  socket = io(chatUrl);
 
   const sender = "sender123";
   const receiver = "receiver123";

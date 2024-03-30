@@ -7,6 +7,7 @@ import io from "socket.io-client";
 import ChatPage from "@/components/chat-page/ChatPage";
 import { useAuth } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { chatUrl } from "@/lib/constants";
 const Page = ({ context }: any) => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -19,7 +20,7 @@ const Page = ({ context }: any) => {
   const [roomId, setroomId] = useState("");
   const router = useRouter();
   var socket: any;
-  socket = io(process.env.CHAT_URL ?? "locahost:3001");
+  socket = io(chatUrl);
 
 
   const sender = userId;
