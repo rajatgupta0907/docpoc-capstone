@@ -11,7 +11,8 @@ export default function Home() {
   const [roomId, setroomId] = useState("");
 
   var socket: any;
-  socket = io("http://localhost:3001");
+  socket = io(process.env.CHAT_URL ?? "locahost:3001");
+
 
   const sender = "sender123";
   const receiver = "receiver123";

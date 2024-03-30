@@ -19,7 +19,7 @@ const Page = ({ context }: any) => {
   const [roomId, setroomId] = useState("");
   const router = useRouter();
   var socket: any;
-  socket = io("http://localhost:3001");
+  socket = io(process.env.CHAT_URL ?? "locahost:3001");
 
   const sender = userId;
   const receiver = doctor_id === userId ? patient_id : doctor_id;
