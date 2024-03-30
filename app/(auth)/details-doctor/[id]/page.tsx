@@ -1,7 +1,7 @@
-import NavBar from "@/components/shared/navbar";
 import { detailsfetchdoctor } from "@/lib/actions/admin.actions";
 import Link from "next/link";
 import { getRatingByDoctor } from "@/lib/actions/rating.actions";
+import NavBars from "@/components/navbars/NavBars";
 
 interface Rating {
   _id: string;
@@ -35,7 +35,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <NavBar />
+      <NavBars />
       <div className="font-sans">
         <div className="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
           <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">

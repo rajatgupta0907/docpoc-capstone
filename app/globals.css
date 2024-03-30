@@ -240,36 +240,58 @@ font-size: 20px;
 }
 
 /* patient dashboard*/
-
+.find_your_doctor{
+  margin-top: 10px;
+}
 
 /*doctor filter*/
-.df_form select{
+.df_name input{
   background-color: rgb(255, 255, 255);
-  width: 150vh;
+ 
+  width: 50vh;
   height: 7vh;
   align-items: center;
   justify-content: center;
-  margin-left: 35%;
+  margin-left: 5%;
+  color: black;
+}
+.df_name{
+  border-bottom: black 1px solid;
+  width: max-content;
+  margin-left: 20%;
+  color: #000;
+}
+.df_form select{
+  background-color: rgb(255, 255, 255);
+  width: 50vh;
+  height: 7vh;
+  align-items: center;
+  justify-content: center;
+  
   border-bottom: black 1px solid;
 
   
 }
 .df_form button{
-  margin-left: 50px;
+  
   border-bottom: 2px solid black;
   height: 7vh;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 75px;
   background-color: rgb(255, 255, 255);
 }
 .df_form button:hover{
-  border-radius: 15px;
-  background-color: rgb(114, 114, 114);
-  color: white;
+font-weight: 500;
+
 }
 .df_formContainer {
-  display: flex;
-  
+  width: 100%;
+  display: grid;
+  grid-template-columns: 60% 40% ; 
+  gap: 40px;
+  margin-top: 20px;
+  align-items: baseline;
 }
 
 /*display doctor cards*/
@@ -424,4 +446,65 @@ th:hover
   font-size: 14px; /* Font size */
   font-weight: bold; /* Bold font weight */
 }
+/*Nav Bars*/
+/*patient dashboard navbar*/
+.patient_dashboard_nav{
+  background-color: rgb(119 213 238);
+}
 
+.patient_dashboard_nav ul{
+  margin-left: 80px;
+}
+.patient_dashboard_nav li{
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2%;
+  font-weight: 400;
+}
+.patient_dashboard_nav li:hover{
+  color: rgb(30, 30, 30);
+  text-decoration: underline 2px;
+  font-weight: 80px;
+}
+.patient_dashboard_nav h2{
+  font-size: 40px;
+  line-height: 140%;
+  font-weight: 500;
+  align-content: center;
+  
+}
+.patient_dashboard_btn{
+  border-radius: 15px;
+  background-color: rgb(24, 155, 192);
+ align-items: center;
+ justify-content: center;
+ 
+}
+.patient_dashboard_btn li{
+  padding: 5px;
+ 
+}
+.patient_dashboard_btn:hover{
+  
+  background-color:  rgb(119 213 238);
+  
+
+}
+
+/*video*/
+.video_box{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  justify-content: center;
+
+}
+.video_box div{
+  border: 1px solid black ;
+  width: 90%;
+  align-items: center;
+  
+  
+
+}

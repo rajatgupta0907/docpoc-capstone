@@ -9,7 +9,7 @@ import { getAppointmentbyDoctor } from "@/lib/actions/appointment.actions";
 
 import { useClerk } from "@clerk/nextjs";
 import { createAppointment } from "@/lib/actions/appointment.actions";
-import NavBar from "@/components/shared/navbar";
+import NavBars from "@/components/navbars/NavBars";
 
 const Page = ({ params }: { params: { id: string } }) => {
   // const params = useParams();
@@ -151,7 +151,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-    <NavBar />
+      <NavBars/>
     <div className="cal_appt" style={{ backgroundColor: 'white', height: '100%', width: '100%' }}>
           
       <FullCalendar 

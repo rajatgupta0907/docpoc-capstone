@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useClerk } from "@clerk/nextjs";
 import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
-
+import NavBars from '@/components/navbars/NavBars';
+import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 export default function Page() {
   const clerk = useClerk();
   let currentUserfromClerk = clerk.user;
@@ -119,8 +120,11 @@ export default function Page() {
   console.log(peerId);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black">
-  <h1 className="text-white text-2xl mb-4">Current user id is {peerId}</h1>
+    <div className='bg-white'>  
+        {patient_ids ? <DoctorNavbar /> : <NavBars />}
+
+      <div className="bg-white ">
+  <h1 className="text-black text-2xl mb-4">Current user id is {peerId}</h1>
   
   <button
     onClick={() => call()}
@@ -128,7 +132,16 @@ export default function Page() {
   >
     Call
   </button>
-  <div className="flex justify-center mt-8">
+  
+  <Link href={
+    `${redirection}`
+  }
+  className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+  
+  >
+End Call      
+</Link>
+  <div className="video_box flex justify-center mt-8">
     <div className="w-full md:w-1/2 lg:w-1/3 mr-4">
       <video
         ref={currentUserVideoRef}
@@ -146,20 +159,14 @@ export default function Page() {
         className="w-full h-auto rounded-md shadow-lg"
       />
     </div>
-  </div>
+    </div>
+
   <div>
-  <Link href={
-    `${redirection}`
-  }
-  className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mb-4"
-  
-  >
-    Go Back
-      </Link>
   
   </div>
 </div>
 
-  
+</div>
+ 
   );
 }

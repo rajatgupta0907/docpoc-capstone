@@ -8,6 +8,7 @@ import { parse, format } from 'date-fns';
 
 import { getAppointmentbyDoctor, rescheduleAppointment } from "@/lib/actions/appointment.actions";
 import { useSearchParams } from 'next/navigation';
+import NavBars from "@/components/navbars/NavBars";
 
 const Page = () => {
   const clerk = useClerk();
@@ -174,6 +175,7 @@ const Page = () => {
 
   return (
     <div className="cal_appt" style={{ backgroundColor: 'white', height: '100%', width: '100%' }}>
+      <NavBars/>
       <FullCalendar 
         allDayClassNames="cal_allday"
         dayCellClassNames="cell"
