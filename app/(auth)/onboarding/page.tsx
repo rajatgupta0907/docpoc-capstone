@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
-import NavBar from "@/components/shared/navbar";
+import NavBars from "@/components/navbars/NavBars";
 
 async function Page() {
   const user = await currentUser();
@@ -26,7 +26,7 @@ async function Page() {
 
 
     <div style={{ backgroundColor: 'white', height: '100%', width: '100%' }}>
-          <NavBar />
+          <NavBars />
 
     <main  className='ob_main mx-auto flex max-w-3xl flex-col justify-start px-10 py-20'>
       <h1 className='head-text'>Onboarding</h1>

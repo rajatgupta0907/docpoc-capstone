@@ -7,13 +7,13 @@ function NavBars() {
   const [navbar, setNavbar] = useState(false);
   return (
     <div>
-      <nav className="w-full bg-blue-500 fixed top-0 left-0 right-0 z-10">
+      <nav className="flex-row top-0 z-30 flex patient_dashboard_nav w-full items-center justify-between bg-dark-2  py-1">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               {/* LOGO */}
-              <Link href="/">
-                <h2 className="text-2xl text-white-600 font-bold ">DOC POC</h2>
+              <Link href="/patient-dashboard">
+                <h2 className="text-2xl  text-white-600 font-bold ">DOC POC</h2>
               </Link>
               {/* HAMBURGER BUTTON FOR MOBILE */}
               <div className="md:hidden">
@@ -54,27 +54,18 @@ function NavBars() {
                 </Link>
             </li>
             <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#blog" onClick={() => setNavbar(!navbar)}>
+                <Link href="/patient-contact-us" onClick={() => setNavbar(!navbar)}>
                 Contact Us
                 </Link>
             </li>
-            {/* <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#contact" onClick={() => setNavbar(!navbar)}>
-                Contact
-                </Link>
-            </li> */}
-            {/* <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#projects" onClick={() => setNavbar(!navbar)}>
-                Projects
-                </Link>
-            </li> */}
-
-            <li className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
-                <Link href="#getstarted" onClick={() => setNavbar(!navbar)}>
+            
+            <div className="patient_dashboard_btn">
+            <li className="text-xl text-white-600 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900" >
+                <Link href="/onboarding" onClick={() => setNavbar(!navbar)}>
                 Your Profile
                 </Link>
             </li>
-
+            </div>
 
 
             </ul>

@@ -25,13 +25,17 @@ const MyMedicinesShow = ({id,doctorid,patientid,uniqueappointmentid,typeofdiseas
         <p className="block mt-1 text-lg leading-tight font-medium text-black">Type of Disease: {typeofdisease}</p>
 
         <p className="mt-2 text-gray-500">{patient_name}</p>
-        <button className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-            View Details
-        </button>
+        <br></br>
         
         <Link  href={`/view-medicines/${id}`}
          className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                 View Your Medicines
+        </Link>
+
+        
+        <Link  href={`/send-review/${id}`}
+         className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Send Review
         </Link>
         
         </div>

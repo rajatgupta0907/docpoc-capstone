@@ -21,7 +21,7 @@ const PatientDashboardShared  = ({ search }: Params) => {
   return (
     <>
     
-<div  className="block mx-auto p-6 bg-white mt-[60px]  item-center border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<div  className="find_your_doctor">
 
 <h1 className="text-3xl font-bold text-gray-900 mb-4 md:mb-0 text-cenetr">Find Your Doctor Now</h1>
 <DoctorFilter setDoctors={setDoctors} page={page} perPage={perPage} />
