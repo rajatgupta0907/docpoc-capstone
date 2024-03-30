@@ -69,6 +69,28 @@ interface Params {
     }
   }
 
+  
+  
+  export async function getMedicinesByDoctor({
+    doctor_id,
+  }: {
+    doctor_id: string;
+  }) {
+    try {
+      connectToDb();
+      // find out if the same appointment exists
+      const data = await Medicines.find({
+        doctorid:doctor_id,
+      });
+  
+      return data;
+    } catch (error: any) {
+      console.log(error);
+      throw new Error(`Failed to find appointment: ${error.message}`);
+    }
+  }
+
+
 
   
   export async function fetchbymedicinesappointment({

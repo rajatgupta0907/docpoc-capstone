@@ -25,7 +25,7 @@ const DoctorPrescriptionSend = ({id,doctor_id,patient_id,appointment_date,appoin
         <p className="block mt-1 text-lg leading-tight font-medium text-black">Appointment Date: {appointment_date.toLocaleDateString()}</p>
 
         <p className="mt-2 text-gray-500">{doctor_name}</p>
-        <Link href="/view-prescription" className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        <Link href="/doctor-all-prescription" className="mt-5 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
             View All Prescription
         </Link>
         

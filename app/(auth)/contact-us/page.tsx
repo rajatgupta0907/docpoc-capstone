@@ -2,7 +2,6 @@
 import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 import { contactUs } from '@/lib/actions/contact.actions';
 import React, { useState, FormEvent, ChangeEvent } from 'react';
-import axios from 'axios';
 
 interface FormData {
   email: string;
