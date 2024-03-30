@@ -55,13 +55,13 @@ function DoctorNavbar() {
             </li>
 
             <li className="pb-6 text-xl text-white-600 py-2 px-6 text-center border-b-2 md:border-b-0 hover:text-gray-750 border-purple-900">
-                <Link href="#blog" onClick={() => setNavbar(!navbar)}>
+                <Link href="/contact-us" onClick={() => setNavbar(!navbar)}>
                 Contact Us
                 </Link>
             </li>
 
             <li className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
-                <Link href="#getstarted" onClick={() => setNavbar(!navbar)}>
+                <Link href="/doctor-admin" onClick={() => setNavbar(!navbar)}>
                 Your Profile
                 </Link>
             </li>
