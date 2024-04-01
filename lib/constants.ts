@@ -109,5 +109,5 @@ export const DoctorTypes = [
   "Oncologist",
   "Dentist",
 ];
-// export const chatUrl = "http://localhost:3001"
-export const chatUrl = "http://ec2-35-183-30-231.ca-central-1.compute.amazonaws.com:3001"
+export const chatUrl = process.env.CHAT_URL || "http://localhost:3001";
+// export const chatUrl = "http://ec2-35-183-30-231.ca-central-1.compute.amazonaws.com:3001"
