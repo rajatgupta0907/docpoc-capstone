@@ -71,7 +71,13 @@ const handleDeleteAppointment = async () => {
     </div>
     </div>
 
-      
+    <br></br>
+      <Link
+                  href={`/doctor-appointment`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
       </div>
   );
 };

@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 import { fetchDoctor } from "@/lib/actions/admin.actions";
 import DoctorProfile from "@/components/forms/DoctorProfile";
+import Link from "next/link";
 
 async function Page() {
   const user = await currentUser();
@@ -32,6 +33,12 @@ async function Page() {
       <DoctorProfile doctor={userData} btnTitle="Continue" />
 
       <section className="mt-9 bg-dark-2 p-10"></section>
+      <Link
+                  href={`/doctor-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
     </main>
   );
 }

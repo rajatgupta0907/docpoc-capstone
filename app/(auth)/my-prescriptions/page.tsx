@@ -6,6 +6,7 @@ import {getMedicinesByPatient} from '@/lib/actions/medicine.actions'
 import MyMedicinesShow from "@/components/shared/MyMedicinesShow";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchDoctorById } from "@/lib/actions/doctor.actions";
+import Link from "next/link";
 
 const Page = async ({ searchParams }: any) => {
 
@@ -66,6 +67,13 @@ const Page = async ({ searchParams }: any) => {
 
       <NavBars />
       <div className="mt-[50px] pt-[50px]"></div>
+      <Link
+                  href={`/patient-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
+                <br></br>
       {newAppointment.map(appointment => (
         
       <MyMedicinesShow 
@@ -81,7 +89,13 @@ const Page = async ({ searchParams }: any) => {
       />
     ))}
 
-       
+<br></br>
+<Link
+                  href={`/patient-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
     
      
     </div>

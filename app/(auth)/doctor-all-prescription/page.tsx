@@ -7,6 +7,7 @@ import MyDoctorMedicinesShow from "@/components/shared/MyDoctorMedicinesShow";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchDoctorById } from "@/lib/actions/doctor.actions";
 import DoctorNavbar from "@/components/navbars/DoctorNavbar";
+import Link from "next/link";
 
 const Page = async ({ searchParams }: any) => {
 
@@ -68,6 +69,13 @@ const Page = async ({ searchParams }: any) => {
 
       <DoctorNavbar />
       <div className="mt-[50px] pt-[50px]"></div>
+      <br></br>
+      <Link
+                  href={`/doctor-prescription`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
       {newAppointment.map(appointment => (
         
       <MyDoctorMedicinesShow 
