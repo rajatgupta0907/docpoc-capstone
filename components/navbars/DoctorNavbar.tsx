@@ -21,11 +21,11 @@ function DoctorNavbar() {
                   onClick={() => setNavbar(!navbar)}
                 >
                   {navbar ? (
-                    <Image src="/close.svg" width={30} height={30} alt="logo" />
+                    <Image src="/assets/images/close.png" width={30} height={30} alt="logo" />
                   ) : (
                     <Image
-                      src="/hamburger-menu.svg"
-                      width={30}
+                    src="/assets/images/menu.png"
+                    width={30}
                       height={30}
                       alt="logo"
                       className="focus:border-none active:border-none"
