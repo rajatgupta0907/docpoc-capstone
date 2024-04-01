@@ -77,8 +77,8 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
   };
   return (
 
-<form onSubmit={handleSubmit(processForm)} className="w-2/3 space-y-6">
-  <div className="df_form df_formContainer text-black">
+<form onSubmit={handleSubmit(processForm)} className="w-2/3 flex flex-wrap ">
+  <div className="df_form df_formContainer text-black flex flex-wrap">
     <div className="df_name ">
           <input
             placeholder="Search By Name"
@@ -90,7 +90,7 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
           )}
     </div>
         
-    <div className="df_formContainer">
+    <div className="df_formContainer flex-wrap flex">
           {/* <input
             placeholder="name"
             className="rounded-lg text-black"
