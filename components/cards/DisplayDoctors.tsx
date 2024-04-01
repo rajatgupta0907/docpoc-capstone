@@ -96,7 +96,10 @@ export default function DisplayDoctors({
               {overallRating ? overallRating.toFixed(1) : "N/A"}
             </span>
           </div>
-          <p className="text-gray-700 dark:text-gray-400 mb-4">{bio}</p>
+          <p className="text-gray-700 dark:text-gray-400 mb-4">{
+            bio.length > 150 ? bio.substring(0, 150) + "..." : bio
+
+          }</p>
         </div>
         <div>
           <Link

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {DoctorTypes} from '@/lib/constants';
 
 import {
   Select,
@@ -219,50 +220,32 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
             </FormItem>
           )}
         />
-
-        <FormField
-          control={form.control}
-          name="speciality"
-          render={({ field }) => (
-            <FormItem className="flex w-full flex-col gap-3">
-              <FormLabel className="text-base-semibold text-light-2">
-                Speciality
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder={field.value} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="General Practitioner">
-                    General Practitioner
-                  </SelectItem>
-                  <SelectItem value="Pediatrician">Pediatrician</SelectItem>
-                  <SelectItem value="Cardiologist">Cardiologist</SelectItem>
-                  <SelectItem value="Dermatologist">Dermatologist</SelectItem>
-                  <SelectItem value="Neurologist">Neurologist</SelectItem>
-                  <SelectItem value="Ophthalmologist">
-                    Ophthalmologist
-                  </SelectItem>
-                  <SelectItem value="Orthopedic Surgeon">
-                    Orthopedic Surgeon
-                  </SelectItem>
-                  <SelectItem value="Psychiatrist">Psychiatrist</SelectItem>
-                  <SelectItem value="Gynecologist">Gynecologist</SelectItem>
-                  <SelectItem value="Urologist">Urologist</SelectItem>
-                  <SelectItem value="Endocrinologist">
-                    Endocrinologist
-                  </SelectItem>
-                  <SelectItem value="Oncologist">Oncologist</SelectItem>
-                  <SelectItem value="Dentist">Dentist</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+<FormField
+  control={form.control}
+  name="speciality"
+  render={({ field }) => (
+    <FormItem className="flex w-full flex-col gap-3">
+      <FormLabel className="text-base-semibold text-light-2">
+        Speciality
+      </FormLabel>
+      <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder={field.value} />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+          {DoctorTypes.map((type, index) => (
+            <SelectItem key={index} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
         <FormField
           control={form.control}
           name="bio"
@@ -283,7 +266,10 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
           )}
         />
 
-        <Button type="submit" className="bg-primary-500">
+        <Button type="submit" 
+                          className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+
+        >
           {btnTitle}
         </Button>
       </form>

@@ -36,6 +36,9 @@ const Page = async ({ searchParams }: any) => {
   const appointmentsWithDoctorNames = await Promise.all(
     myAppointments.map(async (appointment) => {
       const doctorName = await fetchDoctorById(appointment.doctor_id);
+      console.log("doctorName");
+      
+      console.log(doctorName);
       let doctorString = "";
       if (doctorName.name == "" && !doctorName.name) {
         doctorString = doctorName.username;

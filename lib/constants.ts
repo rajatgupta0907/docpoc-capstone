@@ -98,6 +98,16 @@ export const DoctorTypes = [
   "General Practitioner",
   "Ophthalmologist",
   "Pediatrician",
+  "Cardiologist",
+  "Dermatologist",
+  "Neurologist",
+  "Orthopedic Surgeon",
+  "Psychiatrist",
+  "Gynecologist",
+  "Urologist",
+  "Endocrinologist",
+  "Oncologist",
+  "Dentist",
 ];
 // export const chatUrl = "http://localhost:3001"
 export const chatUrl = "http://ec2-35-183-30-231.ca-central-1.compute.amazonaws.com:3001"
