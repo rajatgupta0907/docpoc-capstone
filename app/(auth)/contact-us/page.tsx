@@ -1,6 +1,7 @@
 "use client";
 import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 import { contactUs } from '@/lib/actions/contact.actions';
+import Link from 'next/link';
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 
 interface FormData {
@@ -125,6 +126,12 @@ export default function Page() {
             </button>
           </form>
         </div>
+        <Link
+                  href={`/doctor-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
       </section>
     </>
   );

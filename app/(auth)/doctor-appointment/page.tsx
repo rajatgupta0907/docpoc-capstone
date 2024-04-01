@@ -7,6 +7,7 @@ import { fetchUser } from "@/lib/actions/user.actions";
 
 import appointment from "@/lib/models/appointment.model";
 import { fetchDoctor } from "@/lib/actions/admin.actions";
+import Link from "next/link";
 const Page = async ({ searchParams }: any) => {
   const user = await currentUser();
   if (!user) {
@@ -61,6 +62,14 @@ const Page = async ({ searchParams }: any) => {
     <div className="bg-white">
       <DoctorNavbar />
       <div className="mt-[50px] pt-[50px]"></div>
+      <br></br>
+      <Link
+                  href={`/doctor-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
+             
       {newAppointment.map((appointment) => (
         <DoctorAppointMentShow
           id={appointment.id}
@@ -73,6 +82,14 @@ const Page = async ({ searchParams }: any) => {
           doctor_name={appointment.doctor_name}
         />
       ))}
+
+<br></br>
+      <Link
+                  href={`/doctor-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
     </div>
   );
 };

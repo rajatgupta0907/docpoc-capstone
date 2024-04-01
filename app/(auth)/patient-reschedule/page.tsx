@@ -9,6 +9,7 @@ import { parse, format } from 'date-fns';
 import { getAppointmentbyDoctor, rescheduleAppointment } from "@/lib/actions/appointment.actions";
 import { useSearchParams } from 'next/navigation';
 import NavBars from "@/components/navbars/NavBars";
+import Link from "next/link";
 
 const Page = () => {
   const clerk = useClerk();
@@ -199,6 +200,13 @@ const Page = () => {
           return `${hour}:00 - ${hour + 1}:00`;
         }}
       />
+      <br></br>
+        <Link
+                  href={`/my-appointment`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+        </Link>
     </div>
   );
 };

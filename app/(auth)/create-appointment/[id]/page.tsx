@@ -10,6 +10,7 @@ import { getAppointmentbyDoctor } from "@/lib/actions/appointment.actions";
 import { useClerk } from "@clerk/nextjs";
 import { createAppointment } from "@/lib/actions/appointment.actions";
 import NavBars from "@/components/navbars/NavBars";
+import Link from "next/link";
 
 const Page = ({ params }: { params: { id: string } }) => {
   // const params = useParams();
@@ -178,6 +179,14 @@ const Page = ({ params }: { params: { id: string } }) => {
         }} // Custom slot label format
       />
       </div>
+        <br></br>
+              <Link
+                  href={`/details-doctor/${params.id}`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
+             
     </>
   );
 };

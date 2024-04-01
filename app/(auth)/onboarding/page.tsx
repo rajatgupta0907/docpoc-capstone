@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
 import NavBars from "@/components/navbars/NavBars";
+import Link from "next/link";
 
 async function Page() {
   const user = await currentUser();
@@ -37,6 +38,12 @@ async function Page() {
       <section className='mt-9 bg-dark-2 p-10'>
         <AccountProfile user={userData} btnTitle='Continue' />
       </section>
+      <Link
+                  href={`/patient-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
     </main>
     </div>
   );

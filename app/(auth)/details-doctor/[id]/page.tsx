@@ -46,7 +46,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
               <h2 className="text-2xl font-extrabold text-gray-800">{doctor.name}</h2>
               <div className="flex flex-wrap gap-4 mt-4"></div>
               <div className="flex space-x-2 mt-4">
-              <h2 className="text-2xl font-extrabold text-gray-800">{overallRating}</h2>
+              <h2 className="text-2xl font-extrabold text-gray-800">{overallRating.toFixed(2)}</h2>
                 {[...Array(Math.round(overallRating))].map((_, index) => (
                   <svg
                     key={index}
@@ -97,6 +97,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
           </div>
         </div>
       </div>
+
+      <Link
+                  href={`/patient-dashboard`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+        </Link>
     </>
   );
 };

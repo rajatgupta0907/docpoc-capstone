@@ -122,9 +122,11 @@ export default function Page() {
   return (
     <div className='bg-white'>  
         {patient_ids ? <DoctorNavbar /> : <NavBars />}
-
+        <br></br>
+        <br></br>
+   
       <div className="bg-white ">
-  <h1 className="text-black text-2xl mb-4">Current user id is {peerId}</h1>
+  <h1 className="text-black text-2xl mb-4 mt-20">Current user id is {peerId}</h1>
   
   <button
     onClick={() => call()}

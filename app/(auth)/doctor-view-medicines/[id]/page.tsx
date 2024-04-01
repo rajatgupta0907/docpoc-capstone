@@ -4,6 +4,7 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import DisplayDetailedPrescriptions from "@/components/shared/DisplayDetailedPrescriptions";
 import { fetchDoctorById } from "@/lib/actions/doctor.actions";
 import DoctorNavbar from "@/components/navbars/DoctorNavbar";
+import Link from "next/link";
 
 const Page = async ({ params }: { params: { id: string } }) => {
 
@@ -47,6 +48,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
         medicines= {medicinesnew}
         description= {fetchDataFromDatabase[0].description}
       />
+      <br></br>
+       <Link
+                  href={`/doctor-all-prescription`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+                </Link>
     </>
   );
 };
