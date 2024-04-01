@@ -1,14 +1,14 @@
 "use client"
 import Peer from 'peerjs';
 import React, { useState, useEffect, useRef } from 'react';
-import { useClerk } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import { useSearchParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import NavBars from '@/components/navbars/NavBars';
 import DoctorNavbar from '@/components/navbars/DoctorNavbar';
 export default function Page() {
-  const clerk = useClerk();
-  let currentUserfromClerk = clerk.user;
+  const {userId} = useAuth();
+  let currentUserfromClerk = userId;
   const [peerId, setPeerId] = useState<string>('');
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
   const currentUserVideoRef = useRef<HTMLVideoElement>(null);
