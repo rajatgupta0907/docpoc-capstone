@@ -69,7 +69,6 @@ export default function Page() {
 
   useEffect(() => {
 
-    const initializePeer = () => {
 
       if (!currentUserfromClerk) return; // Wait until clerk user data is available
       const peer = new Peer(currentUserfromClerk.id);
@@ -103,16 +102,7 @@ export default function Page() {
 
 
       peerInstance.current = peer;
-    }
-    initializePeer();
-
-
-    const checkClerkId = setInterval(() => {
-      if (currentUserfromClerk.id) {
-        clearInterval(checkClerkId);
-        initializePeer();
-      }
-    }, 1000);
+    
 
 
     return () => {
