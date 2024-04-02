@@ -10,18 +10,21 @@ async function Page() {
   if (!user) return null; // to avoid typescript warnings
 
   const userInfo = await fetchDoctor(user.id);
+  console.log("working");
+  console.log(userInfo);
   if (userInfo?.onboarded) redirect("/");
   const userData = {
     id: user.id,
     objectId: userInfo?._id,
     username: userInfo ? userInfo?.username : user.username,
     name: userInfo ? userInfo?.name : user.firstName ?? "",
-    bio: userInfo.bio.length > 0 ? userInfo.bio : "",
+    bio:userInfo ? userInfo?.bio : "",
     image: userInfo ? userInfo?.image : user.imageUrl,
-    phonenumber: userInfo.phonenumber.length > 0 ? userInfo.phonenumber : "",
+    phonenumber: userInfo? userInfo?.phonenumber : "",
     isVerified: userInfo ? userInfo?.isVerified : "",
     speciality: userInfo ? userInfo?.speciality : "",
   };
+
   console.log("USER_INFO", userData);
 
   return (
