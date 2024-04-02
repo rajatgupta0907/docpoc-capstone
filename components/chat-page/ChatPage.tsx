@@ -58,25 +58,37 @@ const ChatPage = ({ socket, sender, receiver, myId, patientId }: any) => {
           </p>
         </div> */}
         <div>
-          {chat.map(({ msg, time, sender, patientId }, key) => (
-            <div
-              key={key}
-              className={
-                sender == myId ? style.chatProfileRight : style.chatProfileLeft
-              }
-            >
-              <span className={style.chatProfileSpan}>
-                {patientId === sender ? "🤒" : "💊"}
-              </span>
-              <h3
-                className={
-                  patientId === myId ? "text-black" : "text-blue-egg-dark"
-                }
-              >
-                {msg}
-              </h3>
-            </div>
-          ))}
+          {chat.map((chat, key) => {
+            const senderFromMessage = chat.sender;
+            const receiverFromMessage = chat.receiver;
+            const msg = chat.msg;
+            if (
+              (senderFromMessage == sender &&
+                receiverFromMessage == receiver) ||
+              (senderFromMessage == receiver && receiverFromMessage == sender)
+            )
+              return (
+                <div
+                  key={key}
+                  className={
+                    sender == myId
+                      ? style.chatProfileRight
+                      : style.chatProfileLeft
+                  }
+                >
+                  <span className={style.chatProfileSpan}>
+                    {patientId === sender ? "🤒" : "💊"}
+                  </span>
+                  <h3
+                    className={
+                      patientId === myId ? "text-black" : "text-blue-egg-dark"
+                    }
+                  >
+                    {msg}
+                  </h3>
+                </div>
+              );
+          })}
         </div>
         <div>
           <form onSubmit={(e) => sendData(e)}>
