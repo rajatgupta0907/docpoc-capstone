@@ -17,6 +17,18 @@ interface Params {
   speciality: string;
 }
 
+
+interface VerifiedParams {
+  userId: string;
+  username: string;
+  name: string;
+  bio: string;
+  image: string;
+  isVerified: Boolean;
+  phonenumber: string;
+  speciality: string;
+}
+
 export async function detailsfetchdoctor(userId: string) {
   try {
     connectToDb();
@@ -71,6 +83,41 @@ export async function updateDoctor({
     if (path === "/profile/edit") {
       revalidatePath(path);
     }
+  } catch (error: any) {
+    throw new Error(`Failed to create/update user: ${error.message}`);
+  }
+}
+
+
+
+export async function isVerifiedUpdateDoctor({
+  userId,
+  bio,
+  name,
+  username,
+  phonenumber,
+  image,
+  isVerified,
+  speciality,
+}: VerifiedParams): Promise<void> {
+  try {
+    connectToDb();
+
+    await doctor.findOneAndUpdate(
+      { id: userId },
+      {
+        username,
+        name,
+        bio,
+        image,
+        phonenumber,
+        speciality,
+        isVerified: true,
+        onboarded: true,
+      },
+      { upsert: true }
+    );
+
   } catch (error: any) {
     throw new Error(`Failed to create/update user: ${error.message}`);
   }
