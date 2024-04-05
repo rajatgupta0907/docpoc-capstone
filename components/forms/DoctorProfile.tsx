@@ -33,6 +33,7 @@ import { isBase64Image } from "@/lib/utils";
 
 import { UserValidation } from "@/lib/validations/doctor";
 import { updateDoctor } from "@/lib/actions/admin.actions";
+import Link from "next/link";
 
 interface Props {
   doctor: {
@@ -270,8 +271,14 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
                           className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
 
         >
-          {btnTitle}
+          Submit
         </Button>
+        <Link
+                  href={`/doctor-upload`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+           Upload your documents
+          </Link>
       </form>
     </Form>
   );

@@ -7,6 +7,7 @@ import DoctorNavbar from "@/components/navbars/DoctorNavbar";
 import { getDownloadURL } from "firebase/storage";
 import { createverificationDoctor } from "@/lib/actions/verification.actions";
 import { useAuth } from "@clerk/nextjs";
+import Link from "next/link";
 
 const Page: React.FC = () => {
   const {userId} = useAuth();
@@ -76,6 +77,17 @@ const Page: React.FC = () => {
           {uploadSuccess ? "Data uploaded successfully!" : "Failed to upload data."}
         </div>
       )}
+      <br>
+      </br>
+      <br>
+      </br>
+
+        <Link
+                  href={`/doctor-admin`}
+                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                >
+                  Go Back
+        </Link>
     </div>
   );
 };
