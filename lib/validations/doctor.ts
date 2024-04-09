@@ -21,6 +21,7 @@ export const UserValidation = z.object({
   speciality: z.string({
     required_error: "Please select an email to display.",
   }),
+  emergency: z.string(),
 });
 export const DoctorSearchValidation = z.object({
   specialty: z.string({

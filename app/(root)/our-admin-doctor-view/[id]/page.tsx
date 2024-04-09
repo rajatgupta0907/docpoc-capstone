@@ -32,6 +32,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         image: doctor.image,
         isVerified: true,
         speciality: doctor.speciality,
+        emergency: doctor.emergency || "no"
       });
       // Refresh the doctor details after updating the status
       alert("approved");

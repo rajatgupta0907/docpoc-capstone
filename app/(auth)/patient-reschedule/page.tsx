@@ -10,6 +10,7 @@ import { getAppointmentbyDoctor, rescheduleAppointment } from "@/lib/actions/app
 import { useSearchParams } from 'next/navigation';
 import NavBars from "@/components/navbars/NavBars";
 import Link from "next/link";
+import { fetchDoctorById } from "@/lib/actions/doctor.actions";
 
 const Page = () => {
   const clerk = useClerk();
@@ -21,12 +22,33 @@ const Page = () => {
  
   let newEvents: any[] = []; // Explicitly declare the type of newEvents
 
+  const [slotMinTime, setSlotMinTime] = useState("09:00");
+  const [slotMaxTime, setSlotMaxTime] = useState("17:00");
+
   useEffect(() => {
     async function fetchAppointments() {
       try {
         const newDoctorId = searchParams.get("doctor_id") || "";
         const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
         const dates = appointments.map((appointment) => appointment.appointment_date);
+        const doctordata =  await fetchDoctorById(newDoctorId);
+        if(doctordata && doctordata.emergency != null){
+          const isEmergencyYes = doctordata.emergency === 'yes';
+  
+          if (isEmergencyYes) {
+            setSlotMinTime("00:00");
+            setSlotMaxTime("24:00");
+          } else {
+            setSlotMinTime("09:00");
+            setSlotMaxTime("17:00");
+          }
+  
+        }else{
+          setSlotMinTime("09:00");
+          setSlotMaxTime("17:00");
+        }
+  
+  
         console.log(dates);
         setBookedDates(dates);
         
@@ -98,6 +120,7 @@ const Page = () => {
     try {
       const newDoctorId = searchParams.get("doctor_id") || "";
       const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+
       const dates = appointments.map((appointment) => appointment.appointment_date);
       console.log(dates);
       setBookedDates(dates);
@@ -190,8 +213,8 @@ const Page = () => {
         height="400px"
         contentHeight="auto"
         dateClick={handleEventClick}
-        slotMinTime="09:00"
-        slotMaxTime="17:00"
+        slotMinTime={slotMinTime}
+        slotMaxTime={slotMaxTime}
         slotDuration="01:00:00"
         slotLabelDidMount={handleSlotLabelMount}
         events={events}

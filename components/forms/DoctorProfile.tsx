@@ -46,11 +46,11 @@ interface Props {
     phonenumber: string;
     isVerified: boolean;
     speciality: string;
+    emergency: string;
   };
-  btnTitle: string;
 }
 
-const DoctorProfile = ({ doctor, btnTitle }: Props) => {
+const DoctorProfile = ({ doctor }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const { startUpload } = useUploadThing("media");
@@ -64,6 +64,7 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
       name: doctor?.name ? doctor.name : "",
       username: doctor?.username ? doctor.username : "",
       bio: doctor?.bio ? doctor.bio : "",
+      emergency: doctor?.emergency ? doctor.emergency : "no",
       phonenumber: doctor?.phonenumber ? doctor.phonenumber : "",
       speciality: doctor?.speciality
         ? doctor.speciality
@@ -92,6 +93,7 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
       image: values.profile_photo,
       phonenumber: values.phonenumber,
       speciality: values.speciality,
+      emergency: values.emergency
     });
   };
 
@@ -221,6 +223,38 @@ const DoctorProfile = ({ doctor, btnTitle }: Props) => {
             </FormItem>
           )}
         />
+<FormField
+  control={form.control}
+  name="emergency"
+  render={({ field }) => (
+    <FormItem className="flex w-full flex-col gap-3">
+      <FormLabel className="text-base-semibold text-light-2">
+        Do You Provide Emergency?
+      </FormLabel>
+      <FormControl>
+      <Select onValueChange={field.onChange} defaultValue={doctor.emergency}>
+        <FormControl>
+          <SelectTrigger>
+            <SelectValue placeholder={field.value} />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent>
+            <SelectItem  value="yes">
+              yes
+            </SelectItem>
+            <SelectItem  value="no">
+              no
+            </SelectItem>
+        </SelectContent>
+      </Select>
+
+
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+
 <FormField
   control={form.control}
   name="speciality"

@@ -11,6 +11,7 @@ import { useClerk } from "@clerk/nextjs";
 import { createAppointment } from "@/lib/actions/appointment.actions";
 import NavBars from "@/components/navbars/NavBars";
 import Link from "next/link";
+import { fetchDoctorById } from "@/lib/actions/doctor.actions";
 
 const Page = ({ params }: { params: { id: string } }) => {
   // const params = useParams();
@@ -21,12 +22,33 @@ const Page = ({ params }: { params: { id: string } }) => {
   const [events, setEvents] = useState<any[]>([]);
   const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null); // State to store selected date and time
 
+  const [slotMinTime, setSlotMinTime] = useState("09:00");
+  const [slotMaxTime, setSlotMaxTime] = useState("17:00");
+
   
   useEffect(() => {
     async function fetchAppointments() {
       try {
         const newDoctorId = params.id;
         const appointments = await getAppointmentbyDoctor({ doctor_id: newDoctorId });
+        const doctordata =  await fetchDoctorById(params.id);
+        if(doctordata && doctordata.emergency != null){
+          const isEmergencyYes = doctordata.emergency === 'yes';
+
+          if (isEmergencyYes) {
+            setSlotMinTime("00:00");
+            setSlotMaxTime("24:00");
+          } else {
+            setSlotMinTime("09:00");
+            setSlotMaxTime("17:00");
+          }
+  
+        }else{
+          setSlotMinTime("09:00");
+          setSlotMaxTime("17:00");
+        }
+
+
         const dates = appointments.map((appointment) => appointment.appointment_date);
         console.log(dates);
         
@@ -169,8 +191,8 @@ const Page = ({ params }: { params: { id: string } }) => {
         contentHeight="auto" // Allow calendar to determine its own height based on content
         events={events}
         dateClick={handleEventClick}
-        slotMinTime="09:00"
-        slotMaxTime="17:00"
+        slotMinTime={slotMinTime}
+        slotMaxTime={slotMaxTime}
         slotDuration="01:00:00" // Set slot duration to 1 hour
         slotLabelDidMount={handleSlotLabelMount}
         slotLabelContent={(arg: any ) => {

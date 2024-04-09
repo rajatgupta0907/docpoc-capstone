@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { HomePageCardContent } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 import { Bungee } from "next/font/google";
+import Link from "next/link";
 const bungee = Bungee({
   weight: ['400'],
   style: ['normal'],
@@ -24,38 +25,35 @@ export default function Home() {
         <div className="flex-[2] w-4/4 !opacity-100">
           <NavBar />
         </div>
-        <section className="flex-[9] flex justify-center items-start flex-col align-center w-4/4 mx-60 mt-20">
-          <p className="text-heading3-chat-with-doctor mobile:text-black">
-            Doctor In Your Pocket
-          </p>
-          <p className="text-heading2-paragraph">
-            your trusted companion in health care
-          </p>
-          <p className="text-heading2-paragraph">
-            where a doctor is always within reach, right in your pocket!
-          </p>
-          <Button className="mt-60 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
-            Chat with a doctor
-          </Button>
-        </section>
+        <section className="flex justify-center items-center flex-col text-center py-12 md:py-24 text-white">
+      <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8">
+        Doctor In Your Pocket
+      </h1>
+      <p className="text-lg md:text-xl mb-8 md:max-w-lg">
+        Your trusted companion in health care where a doctor is always within
+        reach, right in your pocket!
+      </p>
+      <Link href= {`/account`} className="bg-blue-egg text-white px-8 py-4 text-base md:text-xl font-semibold hover:bg-blue-egg-light">
+        Chat with a Doctor
+      </Link>
+    </section>
       </div>
       <section className="flex flex-col w-full justify-start items-center bg-white text-blue-egg">
         <p className="text-heading3-bold mt-4">How It works</p>
         <p className="text-heading3-chat-with-doctor mb-16">
           In 3 simple steps
         </p>
-        <div className="flex flex-row justify-evenly w-full">
-          {HomePageCardContent.map((card) => {
-            return (
-              <HomePageCard
-                key={card.index}
-                image={card.image}
-                text={card.text}
-                index={card.index}
-              />
-            );
-          })}
-        </div>
+              <div className="flex flex-wrap justify-center w-full">
+        {HomePageCardContent.map((card) => (
+          <HomePageCard
+            key={card.index}
+            image={card.image}
+            text={card.text}
+            index={card.index}
+          />
+        ))}
+      </div>
+
         <Button className="mt-20 mb-20 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
           Get Started
         </Button>

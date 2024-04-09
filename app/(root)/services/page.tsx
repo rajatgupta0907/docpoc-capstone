@@ -1,9 +1,11 @@
 "use client";
+
 import NavBar from "@/components/shared/navbar";
 import { Button } from "@/components/ui/button";
 import { ServicesPageCards, ServicesWeCantProvide } from "@/lib/constants";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
 const Page = () => {
   const pathname = usePathname();
 
@@ -16,28 +18,30 @@ const Page = () => {
       } `}
     >
       <NavBar />
-      <div className="flex flex-col justify-center items-center bg-white text-blue-egg-dark mt-16">
-        <p className="text-heading3-bold text-blue-egg-dark text-center">
+      <div className="flex flex-col justify-center items-center bg-white text-blue-egg-dark mt-16 px-4 md:px-0">
+        <p className="text-3xl md:text-4xl font-bold mb-8 text-blue-egg-dark text-center">
           What Doc Poc Can Do?
         </p>
-        <div className="flex flex-row mx-10 mt-10 justify-evenly">
+        <div className="flex flex-col md:flex-row mx-auto max-w-7xl justify-center items-center">
           {ServicesPageCards.map((card) => {
             return (
               <div
                 key={card.id}
-                className="homepage_card m-2 flex flex-col justify-center px-5"
+                className="homepage_card m-4 flex flex-col justify-center items-center"
               >
                 <Image
                   src={`/assets/icons/${card.icon}`}
                   width={48}
                   height={48}
                   alt={card.header}
-                  className="self-end -mt-8"
+                  className="-mt-8 mb-4"
                 />
-                <p className="text-center text-heading3-chat-with-doctor">
+                <p className="text-lg md:text-xl font-semibold text-center text-heading3-chat-with-doctor">
                   {card.header}
                 </p>
-                <p className="text-center text-heading-3">{card.description}</p>
+                <p className="text-sm md:text-base text-center text-heading3-chat-with-doctor">
+                  {card.description}
+                </p>
               </div>
             );
           })}
@@ -46,26 +50,26 @@ const Page = () => {
             width={500}
             height={500}
             alt="plus_icon"
-            className="mx-20 p-10 border-1"
+            className="p-10 border-1 hidden md:block"
           />
         </div>
-        <Button className="mt-20 mb-20 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
+        <Button className="mt-10 md:mt-20 mb-20 px-8 py-4 cursor-pointer self-center bg-blue-egg-dark text-white text-xl font-semibold capitalize">
           Get Started
         </Button>
-        <div className="flex flex-col">
-          <p className="text-heading3-chat-with-doctor mb-10 text-center">
+        <div className="flex flex-col items-center w-full">
+          <p className="text-3xl font-bold mb-8 text-blue-egg-dark text-center">
             Services We Cannot Provide
           </p>
-          <div className="bg-blue-50 w-50 p-40">
+          <div className="bg-blue-50 w-full p-4 md:p-8">
             {ServicesWeCantProvide.map((s, i) => (
-              <div key={i} className="flex flex-row justify-start">
+              <div key={i} className="flex flex-row justify-start items-center">
                 <Image
                   src={"/assets/icons/cantprovide.svg"}
                   width={28}
                   height={28}
                   alt="cant_provide"
                 />
-                <p className="text-heading2-paragraph ml-5 opacity-100 text-blue-egg-dark">
+                <p className="text-base md:text-lg ml-3 opacity-100 text-blue-egg-dark">
                   {s}
                 </p>
               </div>
@@ -76,4 +80,5 @@ const Page = () => {
     </div>
   );
 };
+
 export default Page;

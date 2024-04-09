@@ -15,6 +15,7 @@ interface Params {
   path: string;
   phonenumber: string;
   speciality: string;
+  emergency: string;
 }
 
 
@@ -27,6 +28,7 @@ interface VerifiedParams {
   isVerified: Boolean;
   phonenumber: string;
   speciality: string;
+  emergency: string;
 }
 
 export async function detailsfetchdoctor(userId: string) {
@@ -62,6 +64,7 @@ export async function updateDoctor({
   phonenumber,
   image,
   speciality,
+  emergency
 }: Params): Promise<void> {
   try {
     connectToDb();
@@ -76,6 +79,7 @@ export async function updateDoctor({
         phonenumber,
         speciality,
         onboarded: true,
+        emergency
       },
       { upsert: true }
     );
@@ -99,6 +103,7 @@ export async function isVerifiedUpdateDoctor({
   image,
   isVerified,
   speciality,
+  emergency
 }: VerifiedParams): Promise<void> {
   try {
     connectToDb();
@@ -114,6 +119,7 @@ export async function isVerifiedUpdateDoctor({
         speciality,
         isVerified: true,
         onboarded: true,
+        emergency
       },
       { upsert: true }
     );
