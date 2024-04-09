@@ -1,8 +1,5 @@
 export const NavLinksLanding = [
-  {
-    link: "/our-doctors",
-    displayName: "Our Doctors",
-  },
+  
   {
     link: "/services",
     displayName: "Services",

@@ -23,6 +23,7 @@ async function Page() {
     phonenumber: userInfo? userInfo?.phonenumber : "",
     isVerified: userInfo ? userInfo?.isVerified : "",
     speciality: userInfo ? userInfo?.speciality : "",
+    emergency : userInfo ? userInfo?.emergency : "",
   };
 
   console.log("USER_INFO", userData);
@@ -33,7 +34,7 @@ async function Page() {
       <p className="mt-3 text-base-regular text-light-2">
         Complete your profile 
       </p>
-      <DoctorProfile doctor={userData} btnTitle="Continue" />
+      <DoctorProfile doctor={userData} />
 
       <section className="mt-9 bg-dark-2 p-10"></section>
       <Link

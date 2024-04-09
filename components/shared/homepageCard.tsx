@@ -8,7 +8,7 @@ interface Props {
 }
 const HomePageCard = ({ text, image, index }: Props) => {
   return (
-    <Card className="w-1/4 h-1/4 text-blue-egg-dark p-0 flex flex-col items-center justify-center border-none homepage_card">
+    <Card className="w-full md:w-1/2 lg:w-1/3 text-blue-egg-dark p-4  md:mt-6 flex flex-col items-center justify-center border-none homepage_card">
       <CardHeader>
         <p className="text-card-heading text-center -mt-20">{index}</p>
       </CardHeader>

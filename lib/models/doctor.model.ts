@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  emergency: {
+    type:String,
+    default: "no"
+  }
 });
 
 const doctor = mongoose.models.doctor || mongoose.model("doctor", userSchema);

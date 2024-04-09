@@ -1,23 +1,24 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { fetchDoctor, isVerifiedUpdateDoctor } from "@/lib/actions/admin.actions";
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { fetchDoctor, isVerifiedUpdateDoctor } from "@/lib/actions/admin.actions";
+import { FindVerificationDocuments } from '@/lib/actions/verification.actions';
 
 const Page = ({ params }: { params: { id: string } }) => {
   const [doctor, setDoctor] = useState<any>(null);
 
   useEffect(() => {
-    async function fetchDoctorDetails() {
+    async function fetchData() {
       try {
-        const response = await fetchDoctor(params.id);
-        setDoctor(response);
+        const doctorResponse = await fetchDoctor(params.id);
+        setDoctor(doctorResponse);
+
       } catch (error) {
-        console.error("Error fetching doctor details:", error);
+        console.error("Error fetching data:", error);
       }
     }
 
-    fetchDoctorDetails();
+    fetchData();
   }, [params.id]);
 
   const handleApprove = async () => {
@@ -26,16 +27,16 @@ const Page = ({ params }: { params: { id: string } }) => {
         userId: params.id,
         bio: doctor.bio,
         name: doctor.name,
-        
         username: doctor.username,
         phonenumber: doctor.phonenumber,
         image: doctor.image,
-        isVerified: true, 
+        isVerified: true,
         speciality: doctor.speciality,
+        emergency: doctor.emergency || "no"
       });
       // Refresh the doctor details after updating the status
       alert("approved");
-      window.location.href="/our-admin-dashboard";
+      window.location.href = "/our-admin-dashboard";
       const updatedDoctor = await fetchDoctor(params.id);
       setDoctor(updatedDoctor);
     } catch (error) {
@@ -43,6 +44,51 @@ const Page = ({ params }: { params: { id: string } }) => {
     }
   };
 
+  const handleDownload = async () => {
+    
+      
+    try{
+      const response = await FindVerificationDocuments({ id: params.id });
+      let responseJson = JSON.parse(response)
+
+
+      if(responseJson.length === 0 ){
+        alert("No file found");
+        return;
+      }
+      if (responseJson ) {
+        console.log(responseJson);
+        responseJson.forEach(async (item: any) => {
+          try {
+            // Iterate over each URL in the document
+            item.urls.forEach(async (urlObj: any, index: number) => {
+              const url = urlObj.url;
+              const a = document.createElement('a');
+              a.setAttribute('target', '_blank');
+              
+              a.href = url;
+              a.download = `${index}`; // Set a unique filename for each downloaded document
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            });
+          } catch (error) {
+            console.error('Error downloading document:', error);
+          }
+        });
+      } else {
+        console.log("No documents found.");
+      }
+  
+
+    }catch(error:any){
+    console.log("error"+error.message);
+  }
+      
+      return;
+    
+  };
+  
   return (
     <div className="container mx-auto">
       <div className="py-8">
@@ -70,7 +116,11 @@ const Page = ({ params }: { params: { id: string } }) => {
           <button onClick={handleApprove} className="block w-32 px-4 py-2 bg-green-800 text-white font-bold rounded mr-4">
             Approve
           </button>
-          <Link href={`/our-admin-doctor-reject`} className="block w-32 px-4 py-2 bg-red-800 text-white font-bold rounded">
+          <button onClick={handleDownload} className="block w-32 px-4 py-2 bg-blue-800 text-white font-bold rounded mr-4">
+            Download Documents
+          </button>
+
+          <Link href={`/our-admin-cancel/${params.id}`} className="block w-32 px-4 py-2 bg-red-800 text-white font-bold rounded">
             Reject
           </Link>
         </div>

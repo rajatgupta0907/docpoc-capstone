@@ -9,13 +9,6 @@ interface Props {
   url: string[];
 }
 
-
-interface SpecialityParams{
-  userId: string,
-  profileType: string,
-  username: string
-}
-
 export async function createverificationDoctor({ id, url }: Props) {
   try {
     connectToDb();
@@ -39,3 +32,20 @@ export async function createverificationDoctor({ id, url }: Props) {
 
 
 
+
+interface FindProps{
+  id: string;
+}
+export async function FindVerificationDocuments({ id }: FindProps) {
+  try {
+    connectToDb();
+    const itemsQuery = verification.find({ doctor_id: id });
+    const items = await itemsQuery.exec();
+    console.log(items);
+    return JSON.stringify(items);
+
+  } catch (error) {
+    console.error("Error in FindVerificationDocuments:", error);
+    throw error; // Rethrow the error to propagate it to the caller
+  }
+}
