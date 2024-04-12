@@ -3,6 +3,7 @@ import NavBar from "@/components/shared/navbar";
 import { Button } from "@/components/ui/button";
 import { OurMission } from "@/lib/constants";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Page = () => {
@@ -41,7 +42,9 @@ const Page = () => {
             <p className="px-4 md:px-10 font-semibold text-lg md:text-xl text-center">
               DocPoc offers a wide range of services that cater to your health and wellness needs. Our platform connects you with a diverse pool of medical specialists and healthcare providers across various disciplines, ensuring you receive the right consultation, diagnosis, and treatment plan. From general health questions to specialized medical advice, mental health support, and chronic disease management, DocPoc is here to support your journey to better health.
             </p>
-            <Button className="mt-8 md:mt-12 mb-10 md:mb-20 px-8 py-4 cursor-pointer self-center bg-blue-egg-dark text-white text-xl font-semibold capitalize">Know More</Button>
+            <Link  href={`/account`} className="mt-8 md:mt-12 mb-10 md:mb-20 px-8 py-4 cursor-pointer self-center bg-blue-egg-dark text-white text-xl font-semibold capitalize">
+              Get Started
+              </Link>
           </div>
           <div className="mt-8 flex flex-col text-black">
             <p className="text-2xl md:text-4xl font-bold text-center">Our Team</p>

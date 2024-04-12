@@ -4,6 +4,7 @@ import NavBar from "@/components/shared/navbar";
 import { Button } from "@/components/ui/button";
 import { ServicesPageCards, ServicesWeCantProvide } from "@/lib/constants";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Page = () => {
@@ -53,9 +54,9 @@ const Page = () => {
             className="p-10 border-1 hidden md:block"
           />
         </div>
-        <Button className="mt-10 md:mt-20 mb-20 px-8 py-4 cursor-pointer self-center bg-blue-egg-dark text-white text-xl font-semibold capitalize">
+        <Link href={`/account`} className="mt-10 md:mt-20 mb-20 px-8 py-4 cursor-pointer self-center bg-blue-egg-dark text-white text-xl font-semibold capitalize">
           Get Started
-        </Button>
+        </Link>
         <div className="flex flex-col items-center w-full">
           <p className="text-3xl font-bold mb-8 text-blue-egg-dark text-center">
             Services We Cannot Provide

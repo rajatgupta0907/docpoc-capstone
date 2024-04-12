@@ -53,10 +53,9 @@ export default function Home() {
           />
         ))}
       </div>
-
-        <Button className="mt-20 mb-20 px-16 py-8 cursor-pointer self-center bg-blue-egg-dark text-white min-w-min w-5 text-2xl capitalize">
+        <Link href={`/account`} className="mt-10 mb-10 bg-blue-egg text-white px-8 py-4 text-base md:text-xl font-semibold hover:bg-blue-egg-light">
           Get Started
-        </Button>
+        </Link>
       </section>
       <section className="pt-10 flex flex-col w-full justify-start items-center bg-blue-egg-dark text-white">
         <p className="text-heading3-bold">What our patients think of us</p>
