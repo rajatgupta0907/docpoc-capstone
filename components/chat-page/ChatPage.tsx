@@ -71,6 +71,7 @@ const ChatPage = ({ socket, sender, receiver, myId, patientId }: any) => {
               </div>
             </div>
           ))}
+
         </div>
         <form onSubmit={(e) => sendData(e)} className="flex p-4">
           <input
