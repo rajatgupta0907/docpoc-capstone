@@ -39,71 +39,74 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <div className="font-sans">
         <div className="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
           <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-3 bg-gray-100 w-full lg:sticky top-0 text-center p-8">
-              <img src={doctor.image} alt="Doctor" className="w-4/5 rounded object-cover" />
+            <div className="lg:col-span-3 bg-gray-100 w-full lg:sticky top-0 text-center p-8 rounded-lg overflow-hidden">
+              <div className="relative">
+                <img
+                  src={doctor.image}
+                  alt="Doctor"
+                  className="w-full h-auto rounded-lg object-cover transition-transform transform-gpu hover:scale-105"
+                />
+              </div>
             </div>
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-extrabold text-gray-800">{doctor.name}</h2>
-              <div className="flex flex-wrap gap-4 mt-4"></div>
-              <div className="flex space-x-2 mt-4">
-              <h2 className="text-2xl font-extrabold text-gray-800">{overallRating.toFixed(2)}</h2>
-                {[...Array(Math.round(overallRating))].map((_, index) => (
-                  <svg
-                    key={index}
-                    className="w-5 fill-gray-800"
-                    viewBox="0 0 14 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
-                    />
-                  </svg>
-                ))}
+              <h2 className="text-3xl font-extrabold text-gray-800">{doctor.name}</h2>
+              <div className="flex items-center mt-2 text-gray-600">
+                <span className="mr-1">Rating:</span>
+                <span className="flex items-center">
+                  {Array.from({ length: 5 }, (_, index) => (
+                    <svg
+                      key={index}
+                      className={`w-6 h-6 ${index < Math.round(overallRating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M10 1L12.24 6.77L18.18 7.83L13.46 12.17L14.59 18L10 15.4L5.41 18L6.54 12.17L1.82 7.83L7.76 6.77L10 1Z"
+                      />
+                    </svg>
+                  ))}
+                </span>
+                <span className="ml-1">{overallRating.toFixed(2)}</span>
+              </div>
+              <div className="mt-4">
+                <h3 className="text-lg font-bold text-gray-800">About Myself</h3>
+                <p className="mt-2 text-sm text-gray-600">{doctor.bio}</p>
+                <h3 className="mt-4 text-lg font-bold text-gray-800">Speciality: {doctor.speciality}</h3>
               </div>
               <div className="mt-8">
-                <h3 className="text-lg font-bold text-gray-800">About Myself</h3>
-                <p className="space-y-3 list-disc mt-4 pl-4 text-sm text-gray-800">
-                  {doctor.bio}
-                  <h3 className="text-lg font-bold text-gray-800 mt-5">My Speciality: {doctor.speciality}</h3>
-                </p>
-              </div>
-              <div className="mt-8 max-w-md">
                 <h3 className="text-lg font-bold text-gray-800">Reviews</h3>
-                <div className="space-y-3 mt-4">
+                <div className="mt-4">
                   {reviews.map((review, index) => (
-                    <div key={index} className="flex items-center mb-4">
-                     <br></br>
+                    <div key={index} className="flex items-center mt-4">
                       <img src="https://readymadeui.com/team-2.webp" className="w-12 h-12 rounded-full border-2 border-white" />
-                      <div >
-                        <h4 className="font-extrabold text-gray-800">{review.name}</h4>
-                        <p className="text-sm mt-1 font-bold text-gray-800">{review.description}</p>
+                      <div className="ml-4">
+                        <h4 className="text-lg font-semibold text-gray-800">{review.name}</h4>
+                        <p className="mt-1 text-sm text-gray-600">{review.description}</p>
                       </div>
                     </div>
                   ))}
-                 
                 </div>
-                <br></br>
+              </div>
+              <div className="mt-8">
                 <Link
                   href={`/create-appointment/${params.id}`}
-                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
+                  className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200"
                 >
                   Book Now
                 </Link>
-             
-
-                 </div>
+                <Link
+                  href={`/patient-dashboard`}
+                  className="inline-block ml-4 px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-200"
+                >
+                  Go Back
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <Link
-                  href={`/patient-dashboard`}
-                  className="w-full mt-10 px-4  py-2 bg-transparent border-2 border-gray-800 text-gray-800 font-bold rounded"
-                >
-                  Go Back
-        </Link>
     </>
   );
 };
