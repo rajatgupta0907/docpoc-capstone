@@ -21,7 +21,7 @@ async function Page() {
     bio:userInfo ? userInfo?.bio : "",
     image: userInfo ? userInfo?.image : user.imageUrl,
     phonenumber: userInfo? userInfo?.phonenumber : "",
-    isVerified: userInfo ? userInfo?.isVerified : "",
+    isVerified: userInfo ? userInfo?.isVerified : false,
     speciality: userInfo ? userInfo?.speciality : "",
     emergency : userInfo ? userInfo?.emergency : "",
   };

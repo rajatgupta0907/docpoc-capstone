@@ -14,6 +14,7 @@ interface Params {
   image: string;
   path: string;
   phonenumber: string;
+  isVerified: boolean;
   speciality: string;
   emergency: string;
 }
@@ -63,6 +64,7 @@ export async function updateDoctor({
   username,
   phonenumber,
   image,
+  isVerified,
   speciality,
   emergency
 }: Params): Promise<void> {

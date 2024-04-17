@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
@@ -56,6 +57,8 @@ const DoctorProfile = ({ doctor }: Props) => {
   const { startUpload } = useUploadThing("media");
 
   const [files, setFiles] = useState<File[]>([]);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
 
   const form = useForm<z.infer<typeof UserValidation>>({
     resolver: zodResolver(UserValidation),
@@ -92,9 +95,14 @@ const DoctorProfile = ({ doctor }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       phonenumber: values.phonenumber,
+      isVerified: doctor.isVerified,
       speciality: values.speciality,
       emergency: values.emergency
     });
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 7000);
   };
 
   const handleImage = (
@@ -126,6 +134,12 @@ const DoctorProfile = ({ doctor }: Props) => {
         className="flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
+      {showSuccessMessage && (
+        <div className="bg-green-200 text-green-800 p-4 rounded mt-4">
+          Profile updated successfully!
+        </div>
+      )}
+
         <FormField
           control={form.control}
           name="profile_photo"

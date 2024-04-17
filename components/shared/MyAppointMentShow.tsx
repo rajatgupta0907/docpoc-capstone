@@ -12,6 +12,7 @@ interface Params {
   patient_name: string;
   doctor_name: string;
 }
+
 const MyAppointMentShow = ({
   id,
   doctor_id,
@@ -22,89 +23,87 @@ const MyAppointMentShow = ({
   doctor_name,
 }: Params) => {
   const pathname = usePathname();
-  console.log(pathname);
+
   return (
     <div className="max-w-md mx-auto justify-center flex bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3">
       <div className="md:flex">
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-            Doctor Name {doctor_name}
+            Doctor Name: {doctor_name}
           </div>
-          <p className="block mt-1 text-lg leading-tight font-medium text-black">
+          <p className="block mt-4 text-lg leading-tight font-medium text-black">
             Appointment Time: {appointment_time}
           </p>
-          <p className="block mt-1 text-lg leading-tight font-medium text-black">
+          <p className="block mt-2 text-lg leading-tight font-medium text-black">
             Appointment Date: {appointment_date.toLocaleDateString()}
           </p>
+          <p className="mt-4 text-gray-500">Patient Name: {patient_name}</p>
 
-          <p className="mt-2 text-gray-500">{patient_name}</p>
-         
-          <div className="flex flex-col  justify-center">
-
-
-          <Link
-            href={{
-              pathname: "/patient-reschedule",
-              query: {
-                id: id,
-                doctor_id: doctor_id,
-                patient_id: patient_id,
-                doctor_name: doctor_name,
-                patient_name: patient_name,
-                appointment_date: appointment_date.toLocaleDateString(),
-                appointment_time: appointment_time,
-              },
-            }}
-            className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Reschedule Appointment
-          </Link>
-          <Link
-            href={{
-              pathname: "/patient-delete-appointment",
-              query: {
-                id: id,
-                doctor_id: doctor_id,
-                patient_id: patient_id,
-                doctor_name: doctor_name,
-                patient_name: patient_name,
-                appointment_date: appointment_date.toLocaleDateString(),
-                appointment_time: appointment_time,
-              },
-            }}
-            className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Cancel 
-          </Link>
-          <Link
-            href={{
-              pathname: "/patient-chat",
-              query: {
-                id: id,
-                doctor_id: doctor_id,
-                patient_id: patient_id,
-              },
-            }}
-            className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yello-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Start a Chat
-          </Link>
-          <Link
-            href={{
-              pathname: "/video",
-              query: {
-                id: id,
-                doctor_id: doctor_id,
-              },
-            }}
-            className="mt-5 ml-3 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yello-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-          >
-            Start a Video
-          </Link>
-            </div>
+          <div className="mt-8 flex flex-col space-y-4">
+            <Link
+              href={{
+                pathname: "/patient-reschedule",
+                query: {
+                  id: id,
+                  doctor_id: doctor_id,
+                  patient_id: patient_id,
+                  doctor_name: doctor_name,
+                  patient_name: patient_name,
+                  appointment_date: appointment_date.toLocaleDateString(),
+                  appointment_time: appointment_time,
+                },
+              }}
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300"
+            >
+              Reschedule Appointment
+            </Link>
+            <Link
+              href={{
+                pathname: "/patient-delete-appointment",
+                query: {
+                  id: id,
+                  doctor_id: doctor_id,
+                  patient_id: patient_id,
+                  doctor_name: doctor_name,
+                  patient_name: patient_name,
+                  appointment_date: appointment_date.toLocaleDateString(),
+                  appointment_time: appointment_time,
+                },
+              }}
+              className="px-6 py-3 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 transition duration-300"
+            >
+              Cancel Appointment
+            </Link>
+            <Link
+              href={{
+                pathname: "/patient-chat",
+                query: {
+                  id: id,
+                  doctor_id: doctor_id,
+                  patient_id: patient_id,
+                },
+              }}
+              className="px-6 py-3 bg-yellow-600 text-white font-semibold rounded-md hover:bg-yellow-700 transition duration-300"
+            >
+              Start a Chat
+            </Link>
+            <Link
+              href={{
+                pathname: "/video",
+                query: {
+                  id: id,
+                  doctor_id: doctor_id,
+                },
+              }}
+              className="px-6 py-3 bg-yellow-600 text-white font-semibold rounded-md hover:bg-yellow-700 transition duration-300"
+            >
+              Start a Video Call
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 export default MyAppointMentShow;

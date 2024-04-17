@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   profileType: { String },
   isVerified: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   emergency: {
     type:String,
