@@ -3,14 +3,13 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
-import io from "socket.io-client";
 import ChatPage from "@/components/chat-page/ChatPage";
 import { useAuth } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { chatUrl } from "@/lib/constants";
 const Page = ({ context }: any) => {
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  const myId = searchParams.get("id");
   const doctor_id = searchParams.get("doctor_id");
   const patient_id = searchParams.get("patient_id");
   const { userId } = useAuth();
@@ -19,12 +18,8 @@ const Page = ({ context }: any) => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [roomId, setroomId] = useState("");
   const router = useRouter();
-  var socket: any;
-  socket = io(chatUrl);
 
 
-  const sender = userId;
-  const receiver = doctor_id === userId ? patient_id : doctor_id;
   console.log("PATIENT_IDDD", patient_id);
   return (
     <div className="text-black">
@@ -49,13 +44,12 @@ const Page = ({ context }: any) => {
           Go Back
         </Button>
         <ChatPage
-          socket={socket}
           roomId={roomId}
           username={userName}
-          sender={sender}
-          receiver={receiver}
-          myId={userId}
+          Id={myId}
+          type={"patient"}
           patientId={patient_id}
+          doctorId = {doctor_id}
         />
       </div>
     </div>
