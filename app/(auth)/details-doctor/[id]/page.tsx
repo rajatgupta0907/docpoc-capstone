@@ -49,14 +49,22 @@ const Page = async ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className="lg:col-span-2">
-              <h2 className="text-3xl font-extrabold text-gray-800">{doctor.name}</h2>
-              <div className="flex items-center mt-2 text-gray-600">
-                <span className="mr-1">Rating:</span>
-                <span className="flex items-center">
+              <h2 className="text-3xl font-extrabold text-gray-800 mb-4">
+                {doctor.name}
+              </h2>
+              <div className="flex items-center mb-2 text-gray-600">
+                <span className="mr-1 flex justify-center align-center">
+                  Rating:
+                </span>
+                <span className="flex items-center justify-center">
                   {Array.from({ length: 5 }, (_, index) => (
                     <svg
                       key={index}
-                      className={`w-6 h-6 ${index < Math.round(overallRating) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      className={`w-6 h-6 ${
+                        index < Math.round(overallRating)
+                          ? "text-yellow-400"
+                          : "text-gray-300"
+                      }`}
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -70,26 +78,17 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 </span>
                 <span className="ml-1">{overallRating.toFixed(2)}</span>
               </div>
-              <div className="mt-4">
-                <h3 className="text-lg font-bold text-gray-800">About Myself</h3>
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-800">
+                  About Myself
+                </h3>
                 <p className="mt-2 text-sm text-gray-600">{doctor.bio}</p>
-                <h3 className="mt-4 text-lg font-bold text-gray-800">Speciality: {doctor.speciality}</h3>
+                <h3 className="mt-4 text-lg font-bold text-gray-800">
+                  Speciality: {doctor.speciality}
+                </h3>
               </div>
-              <div className="mt-8">
-                <h3 className="text-lg font-bold text-gray-800">Reviews</h3>
-                <div className="mt-4">
-                  {reviews.map((review, index) => (
-                    <div key={index} className="flex items-center mt-4">
-                      <img src="https://readymadeui.com/team-2.webp" className="w-12 h-12 rounded-full border-2 border-white" />
-                      <div className="ml-4">
-                        <h4 className="text-lg font-semibold text-gray-800">{review.name}</h4>
-                        <p className="mt-1 text-sm text-gray-600">{review.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-8">
+
+              <div className="mt-8 flex justify-between">
                 <Link
                   href={`/create-appointment/${params.id}`}
                   className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200"
@@ -98,10 +97,35 @@ const Page = async ({ params }: { params: { id: string } }) => {
                 </Link>
                 <Link
                   href={`/patient-dashboard`}
-                  className="inline-block ml-4 px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-200"
+                  className="inline-block px-6 py-3 bg-gray-200 text-gray-800 font-semibold rounded hover:bg-gray-300 transition duration-200"
                 >
                   Go Back
                 </Link>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800">Reviews</h3>
+                <div className="mt-4 space-y-4">
+                  {reviews.map((review, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center bg-white shadow-md rounded-lg p-4"
+                    >
+                      <img
+                        src="https://readymadeui.com/team-2.webp"
+                        className="w-12 h-12 rounded-full border-2 border-white"
+                        alt="Profile"
+                      />
+                      <div className="ml-4">
+                        <h4 className="text-lg font-semibold text-gray-800">
+                          {review.name}
+                        </h4>
+                        <p className="mt-1 text-sm text-gray-600">
+                          {review.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
