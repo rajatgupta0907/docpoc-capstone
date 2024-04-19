@@ -112,7 +112,7 @@ const DoctorFilter = ({ setDoctors, perPage, page }: any) => {
             defaultChecked={false}
             onCheckedChange={(checked) => {
               console.log(checked);
-              setValue("emergency", checked);
+              setValue("emergency", !!checked);
             }}
           />
           <label
