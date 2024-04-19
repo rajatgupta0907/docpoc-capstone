@@ -28,4 +28,5 @@ export const DoctorSearchValidation = z.object({
     required_error: "Please select a specialty to display.",
   }),
   name: z.string(),
+  emergency: z.boolean().default(false).optional(),
 });
